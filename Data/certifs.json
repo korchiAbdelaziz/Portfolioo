@@ -1,0 +1,223 @@
+[
+  {
+    "title": "Oracle Cloud Infrastructure 2025 DevOps Professional",
+    "org": "Oracle",
+    "date": "2025-09-17",
+    "skills": [
+      "Cloud",
+      "DevOps"
+    ],
+    "image": "Data/certif/Oracle_Cloud_Infrastructure_2025_Certified_DevOps_Professional.pdf",
+    "verify_link": "N/A"
+  },
+  {
+    "title": "Database Management with MySQL",
+    "org": "Meta",
+    "date": "2024-12-24",
+    "skills": [
+      "MySQL",
+      "SQL"
+    ],
+    "image": "Data/certif/Mysql.pdf",
+    "verify_link": "https://coursera.org/verify/ELB3TCIV5115"
+  },
+  {
+    "title": "Power BI Data Analysis",
+    "org": "Microsoft",
+    "date": "2024-12-27",
+    "skills": [
+      "Power BI",
+      "Data Viz"
+    ],
+    "image": "Data/certif/Power BI.pdf",
+    "verify_link": "https://coursera.org/verify/8UVA30CWHE50"
+  },
+  {
+    "title": "Impact Measurement & Management for the SDGs",
+    "org": "Duke_University",
+    "date": "2024-05-20",
+    "skills": [
+      "SDG",
+      "Management"
+    ],
+    "image": "Data/certif/Impact Measurement & Management for the SDGs.pdf",
+    "verify_link": "https://coursera.org/verify/APMZA858FKYQ"
+  },
+  {
+    "title": "Introduction to CSS3",
+    "org": "University_of_Michigan",
+    "date": "2024-01-20",
+    "skills": [
+      "CSS3",
+      "Design"
+    ],
+    "image": "Data/certif/css3 certif.pdf",
+    "verify_link": "https://coursera.org/verify/KFLEVJVT28PD"
+  },
+  {
+    "title": "Introduction to HTML5",
+    "org": "University_of_Michigan",
+    "date": "2024-01-19",
+    "skills": [
+      "HTML5",
+      "Web Development"
+    ],
+    "image": "Data/certif/Html5 certif.pdf",
+    "verify_link": "https://coursera.org/verify/WTUCSCUUWC5Z"
+  },
+  {
+    "title": "Interactivity with JavaScript",
+    "org": "University_of_Michigan",
+    "date": "2024-01-19",
+    "skills": [
+      "JavaScript",
+      "Interactivity"
+    ],
+    "image": "Data/certif/Interactivity_with_JavaScript_2024.pdf",
+    "verify_link": "https://coursera.org/verify/FK7CKG52LE2L"
+  },
+  {
+    "title": "Introduction à la programmation orientée objet (C++)",
+    "org": "EPFL",
+    "date": "2024-01-17",
+    "skills": [
+      "C++",
+      "POO"
+    ],
+    "image": "Data/certif/Introduction_a_la_programmation_orientée_objet_17_janvier_2024.pdf",
+    "verify_link": "https://coursera.org/verify/AQ6XXL6MFTYP"
+  },
+  {
+    "title": "Software Engineering: Modeling UML",
+    "org": "HKUST",
+    "date": "2024-05-20",
+    "skills": [
+      "UML",
+      "Modeling"
+    ],
+    "image": "Data/certif/COO.pdf",
+    "verify_link": "https://coursera.org/verify/J3JMY7JQ6DQV"
+  },
+  {
+    "title": "Villes africaines: Développement durable",
+    "org": "EPFL",
+    "date": "2024-05-24",
+    "skills": [
+      "Afrique",
+      "Urbanisme"
+    ],
+    "image": "Data/certif/Introduction to Sustainable Development and Their Relevance to Africa.pdf",
+    "verify_link": "https://coursera.org/verify/ALTP67VPVTT2"
+  },
+  {
+    "title": "Machine Learning with Python",
+    "org": "IBM",
+    "date": "2025-12-14",
+    "skills": [
+      "Python",
+      "ML"
+    ],
+    "image": "Data/certif/Machine Learning with Python.pdf",
+    "verify_link": "https://coursera.org/verify/Q889MJB4DG5T"
+  },
+  {
+    "title": "The_Unix_Workbench",
+    "org": "Johns Hopkins",
+    "date": "2024-05-18",
+    "skills": [
+      "Unix",
+      "Shell"
+    ],
+    "image": "Data/certif/Unix.pdf",
+    "verify_link": "https://coursera.org/verify/L878R7ZFQYJU"
+  },
+  {
+    "title": "Programming for Everybody (Python)",
+    "org": "U-Michigan",
+    "date": "2024-05-20",
+    "skills": [
+      "Python",
+      "Logic"
+    ],
+    "image": "Data/certif/Python.pdf",
+    "verify_link": "https://coursera.org/verify/MUQKMYR4PCQ8"
+  },
+  {
+    "title": "La recherche documentaire",
+    "org": "Polytechnique",
+    "date": "2024-05-20",
+    "skills": [
+      "Information",
+      "Recherche"
+    ],
+    "image": "Data/certif/Recherche documentaire.pdf",
+    "verify_link": "https://coursera.org/verify/U7CYJ5EC4HCH"
+  },
+  {
+    "title": "C++ Programming POO (V2)",
+    "org": "EPFL",
+    "date": "2024-01-17",
+    "skills": [
+      "C++",
+      "POO"
+    ],
+    "image": "Data/certif/c++ certif.pdf",
+    "verify_link": "https://coursera.org/verify/AQ6XXL6MFTYP"
+  },
+  {
+    "title": "Introduction to CSS3 (Advanced)",
+    "org": "U-Michigan",
+    "date": "2024-01-20",
+    "skills": [
+      "CSS3",
+      "Design"
+    ],
+    "image": "Data/certif/Introduction_To_Css3_2024.pdf",
+    "verify_link": "https://coursera.org/verify/KFLEVJVT28PD"
+  },
+  {
+    "title": "Introduction to HTML5 (Advanced)",
+    "org": "U-Michigan",
+    "date": "2024-01-19",
+    "skills": [
+      "HTML5",
+      "Web"
+    ],
+    "image": "Data/certif/Introduction_To_HTML5_2024.pdf",
+    "verify_link": "https://coursera.org/verify/WTUCSCUUWC5Z"
+  },
+  {
+    "title": "Software Engineering modeling UML (V2)",
+    "org": "HKUST",
+    "date": "2024-05-20",
+    "skills": [
+      "UML",
+      "Software"
+    ],
+    "image": "Data/certif/Software Engineering.pdf",
+    "verify_link": "https://coursera.org/verify/J3JMY7JQ6DQV"
+  },
+  {
+    "title": "Sustainable Development Afrique (V2)",
+    "org": "EPFL",
+    "date": "2024-05-24",
+    "skills": [
+      "Afrique",
+      "SDG"
+    ],
+    "image": "Data/certif/Impact Measurement.pdf",
+    "verify_link": "https://coursera.org/verify/ALTP67VPVTT2"
+  },
+ 
+  {
+    "title": "JavaScript Interactivity Certif (V2)",
+    "org": "U-Michigan",
+    "date": "2024-01-19",
+    "skills": [
+      "JS",
+      "DOM"
+    ],
+    "image": "Data/certif/javascript certif.pdf",
+    "verify_link": "https://coursera.org/verify/FK7CKG52LE2L"
+  }
+]

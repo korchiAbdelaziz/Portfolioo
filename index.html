@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Abdelaziz Korchi | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #050505;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #3b82f6, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bubble-skill {
+            position: absolute;
+            pointer-events: none;
+            font-weight: 800;
+            color: rgba(59, 130, 246, 0.3);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .active-page {
+            background: #3b82f6 !important;
+            color: white !important;
+        }
+
+        .cert-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .cert-card:hover {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl">
+        <div class="glass rounded-full px-6 md:px-10 py-4 flex justify-between items-center">
+            <span class="font-black text-xl tracking-tighter">AK<span class="text-blue-500">.</span></span>
+            <div class="flex gap-6 items-center">
+                <a id="nav-yt" href="#" target="_blank" class="hover:text-red-500 transition"><i
+                        data-lucide="youtube"></i></a>
+                <a id="nav-gh" href="#" target="_blank" class="hover:text-blue-500 transition"><i
+                        data-lucide="github"></i></a>
+                <a id="nav-li" href="#" target="_blank" class="hover:text-blue-500 transition"><i
+                        data-lucide="linkedin"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div id="bubble-zone" class="absolute inset-0 z-0"></div>
+        <div class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
+            <div class="text-left order-2 lg:order-1">
+                <h2 id="hero-mini-title" class="text-blue-500 font-bold tracking-[0.3em] uppercase mb-4 text-sm"></h2>
+                <h1 id="hero-name" class="text-5xl md:text-7xl font-black mb-6 leading-tight"></h1>
+                <p id="hero-desc" class="text-zinc-400 text-lg mb-8 max-w-xl"></p>
+                <div class="flex gap-4">
+                    <a href="#projects"
+                        class="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-2xl font-bold transition-all">Projets</a>
+                    <a href="#certs"
+                        class="glass px-8 py-4 rounded-2xl font-bold hover:bg-white/5 transition-all">Certifications</a>
+                </div>
+            </div>
+            <div class="relative flex justify-center items-center order-1 lg:order-2 h-[400px]">
+                <img id="profile-img" src=""
+                    class="relative w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-8 border-white/5 shadow-2xl z-10">
+            </div>
+        </div>
+    </header>
+
+    <section id="projects" class="py-24 px-6 max-w-7xl mx-auto">
+        <h2 class="text-4xl font-bold mb-16 text-center">Projets <span class="text-gradient font-black">AI &
+                Full-Stack</span></h2>
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </section>
+
+    <section id="certs" class="py-24 bg-zinc-950/50 border-y border-white/5 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-4xl font-bold mb-6">Vault <span class="text-blue-500">Certifications</span></h2>
+                    <div class="relative">
+                        <i data-lucide="search"
+                            class="absolute left-4 top-1/2 -translate-y-1/2 text-blue-500 w-5 h-5"></i>
+                        <input type="text" id="cert-search" oninput="resetCerts()"
+                            placeholder="Filtrer (Python, SQL, Cloud...)"
+                            class="w-full bg-zinc-900 border border-white/10 p-5 pl-12 rounded-2xl outline-none focus:border-blue-500 transition">
+                    </div>
+                </div>
+                <div id="cert-total" class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest"></div>
+            </div>
+
+            <div id="certs-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"></div>
+            <div id="pagination" class="flex justify-center gap-2"></div>
+        </div>
+    </section>
+
+    <div id="modal" class="hidden fixed inset-0 bg-black/95 z-[200] flex items-center justify-center p-0 md:p-6"
+        onclick="closeModal()">
+        <div class="bg-zinc-900 w-full h-full md:h-auto md:max-w-6xl md:rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row shadow-2xl relative"
+            onclick="event.stopPropagation()">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-blue-500 z-50"><i data-lucide="x-circle"
+                    class="w-10 h-10"></i></button>
+            <div id="modal-media" class="md:w-3/5 bg-black min-h-[350px] flex items-center justify-center"></div>
+            <div id="modal-info" class="md:w-2/5 p-8 md:p-12 flex flex-col justify-center bg-zinc-900"></div>
+        </div>
+    </div>
+
+    <script>
+        let allCerts = [], filteredCerts = [], currentPage = 1, globalProjects = [];
+        const certsPerPage = 8;
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        async function init() {
+            try {
+                const [info, projs, certsData] = await Promise.all([
+                    fetch('Data/info.json').then(r => r.ok ? r.json() : Promise.reject('info.json introuvable')),
+                    fetch('Data/projets.json').then(r => r.ok ? r.json() : Promise.reject('projets.json introuvable')),
+                    fetch('Data/certifs.json').then(r => r.ok ? r.json() : Promise.reject('certifs.json introuvable'))
+                ]);
+
+                const p = info.profile;
+                document.getElementById('hero-mini-title').innerText = p.title;
+                document.getElementById('hero-name').innerText = p.fullName;
+                document.getElementById('hero-desc').innerText = p.description;
+                document.getElementById('profile-img').src = "Data/abdelaziz.png";
+                document.getElementById('nav-gh').href = p.social.github;
+                document.getElementById('nav-li').href = p.social.linkedin;
+                if (document.getElementById('nav-yt')) document.getElementById('nav-yt').href = p.social.youtube || "#";
+
+                globalProjects = projs.projects;
+                allCerts = certsData;
+
+                createBubbles(p.skills_bubbles);
+                renderProjects();
+                resetCerts();
+                lucide.createIcons();
+
+            } catch (e) {
+                console.error("ERREUR CRITIQUE :", e);
+                alert("Erreur de chargement : " + e);
+            }
+        }
+
+        function createBubbles(skills) {
+            const zone = document.getElementById('bubble-zone');
+            if (!skills) return;
+            skills.forEach(skill => {
+                const b = document.createElement('div');
+                b.className = "bubble-skill";
+                b.innerText = skill;
+                zone.appendChild(b);
+                gsap.set(b, { x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight, opacity: 0 });
+                gsap.to(b, {
+                    x: "+=" + (Math.random() * 100 - 50),
+                    y: "+=" + (Math.random() * 100 - 50),
+                    opacity: 0.3, duration: 10 + Math.random() * 10, repeat: -1, yoyo: true, ease: "sine.inOut"
+                });
+            });
+        }
+
+        function renderProjects() {
+            const grid = document.getElementById('projects-grid');
+            grid.innerHTML = globalProjects.map(p => `
+                <div onclick='openProject(${p.id})' class="cert-card glass rounded-[2rem] overflow-hidden cursor-pointer group shadow-lg">
+                    <div class="h-56 relative overflow-hidden">
+                        <img src="${p.thumbnail}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
+                            <i data-lucide="play-circle" class="w-12 h-12 text-white"></i>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition">${p.title}</h3>
+                        <p class="text-zinc-500 text-sm mb-4 line-clamp-2">${p.description}</p>
+                        <div class="flex flex-wrap gap-2">
+                            ${p.skills.map(s => `<span class="bg-white/5 px-2 py-1 rounded text-[10px] uppercase font-bold tracking-tighter border border-white/5">#${s}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function resetCerts() {
+            const query = document.getElementById('cert-search').value.toLowerCase();
+            filteredCerts = allCerts.filter(c =>
+                c.title.toLowerCase().includes(query) ||
+                c.skills.some(s => s.toLowerCase().includes(query))
+            );
+            currentPage = 1;
+            renderCerts();
+        }
+
+        function renderCerts() {
+            const grid = document.getElementById('certs-grid');
+            const start = (currentPage - 1) * certsPerPage;
+            const pageData = filteredCerts.slice(start, start + certsPerPage);
+            document.getElementById('cert-total').innerText = `${filteredCerts.length} Certificats`;
+
+            grid.innerHTML = pageData.map(c => `
+                <div onclick='openCert(${JSON.stringify(c)})' class="cert-card bg-zinc-900/40 rounded-[2rem] overflow-hidden cursor-pointer group shadow-lg">
+                    <div class="h-44 relative bg-black/40">
+                        <img src="Data/fake.png" class="w-full h-full object-cover opacity-20 group-hover:opacity-40 transition">
+                        <div class="absolute inset-0 flex items-center justify-center p-6">
+                            <span class="text-blue-500 font-black text-[10px] border border-blue-500/30 px-3 py-1 uppercase italic tracking-widest">${c.org}</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-zinc-600 text-[10px] font-bold uppercase mb-2">${c.date}</p>
+                        <h4 class="text-sm font-bold leading-tight h-10 line-clamp-2 mb-6 group-hover:text-blue-400 transition-colors uppercase italic">${c.title}</h4>
+                        <div class="w-full py-3 border border-white/10 text-center rounded-xl font-bold text-[10px] group-hover:bg-blue-600 group-hover:border-blue-600 transition-all uppercase tracking-widest">Voir Détails</div>
+                    </div>
+                </div>
+            `).join('');
+
+            renderPagination();
+            lucide.createIcons();
+        }
+
+        function renderPagination() {
+            const total = Math.ceil(filteredCerts.length / certsPerPage);
+            const container = document.getElementById('pagination');
+            container.innerHTML = "";
+            for (let i = 1; i <= total; i++) {
+                container.innerHTML += `<button onclick="changePage(${i})" class="w-10 h-10 rounded-xl bg-zinc-900 font-bold text-xs ${i === currentPage ? 'active-page' : 'hover:bg-white/5'}">${i}</button>`;
+            }
+        }
+
+        function changePage(p) {
+            currentPage = p;
+            renderCerts();
+            document.getElementById('certs').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openProject(id) {
+            const p = globalProjects.find(x => x.id === id);
+            if (!p) return;
+            const modal = document.getElementById('modal');
+            document.getElementById('modal-media').innerHTML = `<video src="${p.media}" controls autoplay class="w-full h-full"></video>`;
+            document.getElementById('modal-info').innerHTML = `
+                <h2 class="text-3xl md:text-5xl font-black mb-4 italic text-blue-500 leading-none uppercase tracking-tighter">${p.title}</h2>
+                <p class="text-zinc-400 text-sm mb-8 leading-relaxed">${p.description}</p>
+                <div class="flex flex-wrap gap-2 mb-10">${p.skills.map(s => `<span class="bg-zinc-800 px-4 py-2 rounded-xl text-[10px] font-bold border border-white/5 italic">#${s.toUpperCase()}</span>`).join('')}</div>
+                <a href="${p.source_link}" target="_blank" class="bg-blue-600 text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest text-center italic shadow-xl">📁 Code Source Github</a>
+            `;
+            modal.classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function openCert(c) {
+            const modal = document.getElementById('modal');
+            const media = document.getElementById('modal-media');
+            media.innerHTML = isMobile ?
+                `<div class="flex flex-col items-center p-10"><i data-lucide="file-check" class="w-20 h-20 text-blue-500 mb-8"></i><a href="${c.image}" target="_blank" class="bg-blue-600 px-10 py-5 rounded-2xl font-black uppercase text-xs italic tracking-widest">Ouvrir le PDF (HD)</a></div>` :
+                `<iframe src="${c.image}" class="w-full h-full border-none"></iframe>`;
+
+            document.getElementById('modal-info').innerHTML = `
+                <h2 class="text-3xl md:text-5xl font-black mb-4 italic text-blue-500 leading-none uppercase tracking-tighter italic">${c.title}</h2>
+                <p class="text-white font-bold text-2xl mb-8 opacity-80">${c.org}</p>
+                <div class="flex flex-wrap gap-2 mb-10">${c.skills.map(s => `<span class="bg-zinc-800 px-4 py-2 rounded-xl text-[10px] font-bold border border-white/5 italic">#${s.toUpperCase()}</span>`).join('')}</div>
+                ${c.verify_link !== "N/A" ? `<a href="${c.verify_link}" target="_blank" class="inline-flex items-center justify-center gap-3 bg-blue-600 text-white px-8 py-5 rounded-2xl font-black text-xs uppercase italic tracking-widest"><i data-lucide="external-link"></i> VÉRIFIER AUTHENTICITÉ</a>` : ''}
+            `;
+            modal.classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+            document.getElementById('modal-media').innerHTML = "";
+        }
+
+        window.onload = init;
+    </script>
+</body>
+
+</html>

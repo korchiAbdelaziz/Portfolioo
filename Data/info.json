@@ -1,0 +1,26 @@
+{
+    "profile": {
+        "fullName": "Abdelaziz KORCHI",
+        "photo": "abdelaziz.png",
+        "title": "Futur Ingénieur en Informatique & Réseaux",
+        "specialty": "AI, Data Science & Full-Stack",
+        "description": "Étudiant en cycle d'Ingénieur à l'EMSI et en Master à l'Université Côte d'Azur. Passionné par l'IA et le développement, je conçois des solutions innovantes et performantes.",
+        "skills_bubbles": [
+            "Python",
+            "React",
+            "AI",
+            "Docker",
+            "Laravel",
+            "Ollama",
+            "NLP",
+            "C++",
+            "Java",
+            "SQL"
+        ],
+        "social": {
+            "linkedin": "https://linkedin.com/in/votre-profil",
+            "github": "https://github.com/votre-profil",
+            "email": "abdelazizkorchii@gmail.com"
+        }
+    }
+}
