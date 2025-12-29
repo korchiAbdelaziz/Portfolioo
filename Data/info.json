@@ -1,26 +1,91 @@
 {
     "profile": {
         "fullName": "Abdelaziz KORCHI",
-        "photo": "abdelaziz.png",
         "title": "Futur Ingénieur en Informatique & Réseaux",
-        "specialty": "AI, Data Science & Full-Stack",
-        "description": "Étudiant en cycle d'Ingénieur à l'EMSI et en Master à l'Université Côte d'Azur. Passionné par l'IA et le développement, je conçois des solutions innovantes et performantes.",
+        "description": "Étudiant en cycle d’Ingénieur Informatique & Réseaux à l’EMSI, en parallèle d’un Master MBDS à l’Université Côte d’Azur (France). Passionné par le développement full-stack, la data engineering et l’IA, je conçois des solutions performantes et orientées utilisateur.",
+        "photo": "Data/abdelaziz.png",
+        "cv_link": "Data/Korchi_Abdelaziz_CV.pdf",
+        "location": "Casablanca, Maroc",
+        "email": "abdelazizkorchii@gmail.com",
+        "phone": "+212 714 515 588",
         "skills_bubbles": [
             "Python",
+            "SQL",
+            "IA",
             "React",
-            "AI",
             "Docker",
-            "Laravel",
-            "Ollama",
-            "NLP",
-            "C++",
-            "Java",
-            "SQL"
+            "Cloud"
         ],
         "social": {
-            "linkedin": "https://linkedin.com/in/votre-profil",
-            "github": "https://github.com/votre-profil",
-            "email": "abdelazizkorchii@gmail.com"
-        }
+            "github": "https://github.com/votre_lien",
+            "linkedin": "https://linkedin.com/in/votre_lien",
+            "youtube": "https://youtube.com/@votre_lien"
+        },
+        "experiences": [
+            {
+                "company": "Royal Air Maroc",
+                "logo": "Data/royal.png",
+                "role": "Data Engineering Intern",
+                "date": "07/2025 - 09/2025",
+                "badges": [
+                    "Python",
+                    "OpenCV",
+                    "ETL",
+                    "OCR"
+                ],
+                "desc": "Mise en place d’un système OCR pour l’extraction automatique des données des billets d’avion et intégration vers les pipelines ETL."
+            },
+            {
+                "company": "Zen Networks",
+                "logo": "Data/zen.png",
+                "role": "Chatbot & Data Automation Developer",
+                "date": "08/2025 - 10/2025",
+                "badges": [
+                    "LLM local",
+                    "NLP",
+                    "SQL",
+                    "Superset"
+                ],
+                "desc": "Développement d’un agent intelligent LLM local pour le diagnostic d’anomalies et génération de requêtes SQL via NLP."
+            },
+            {
+                "company": "Wings Technologie",
+                "logo": "Data/win",
+                "role": "Mobile & Web Developer",
+                "date": "06/2024 - 08/2024",
+                "badges": [
+                    "React.js",
+                    "Express.js",
+                    "Firebase"
+                ],
+                "desc": "Développement d’un site web de création de cartes digitales personnalisées."
+            },
+            {
+                "company": "Agri 4.0",
+                "logo": "Data/agri.png",
+                "role": "Full-Stack Developer",
+                "date": "09/2023 - 10/2023",
+                "badges": [
+                    "Laravel",
+                    "React.js",
+                    "MongoDB"
+                ],
+                "desc": "Conception et développement d’une application web de gestion de magasins avec base NoSQL."
+            }
+        ],
+        "languages": [
+            {
+                "name": "Arabe",
+                "level": "Maternelle"
+            },
+            {
+                "name": "Français",
+                "level": "Avancé"
+            },
+            {
+                "name": "Anglais",
+                "level": "Intermédiaire"
+            }
+        ]
     }
 }
