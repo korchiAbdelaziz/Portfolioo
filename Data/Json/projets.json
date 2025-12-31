@@ -6,13 +6,13 @@
             "description": "Agent intelligent pour le diagnostic automatique des anomalies avec LLM local[cite: 50].",
             "media": "Data/projects/anomalies.mp4",
             "thumbnail": "Data/projects/thumb_anomalies.jpg",
-            "source_link": "https://github.com/votre-repo/anomalies-llm",
+            "source_link": "https://github.com/korchiAbdelaziz/ZenNetwork-Project---Stage-4IIR--AgentIA",
             "skills": [
                 "Python",
                 "Ollama",
                 "Local LLM",
                 "Diagnostic",
-                "Deep Learning [cite: 50]"
+                "Deep Learning "
             ]
         },
         {
@@ -21,7 +21,7 @@
             "description": "Système de Retrieval-Augmented Generation pour l'assistance intelligente basée sur des documents locaux.",
             "media": "Data/projects/rag.mp4",
             "thumbnail": "Data/projects/thumb_rag.jpg",
-            "source_link": "https://github.com/votre-repo/rag-local",
+            "source_link": "https://github.com/korchiAbdelaziz/ChatBoot_Local_RAG",
             "skills": [
                 "Python",
                 "RAG",
@@ -35,12 +35,12 @@
             "description": "Modèle CNN/Keras entraîné pour la détection de pathologies pulmonaires[cite: 17].",
             "media": "Data/projects/pneumonia.webm",
             "thumbnail": "Data/projects/thumb_pneumonia.jpg",
-            "source_link": "https://github.com/votre-repo/scanner-ai",
+            "source_link": "https://github.com/korchiAbdelaziz/pneumonia_IA",
             "skills": [
                 "Python",
-                "Streamlit [cite: 18]",
+                "Streamlit ",
                 "CNN",
-                "Keras [cite: 17]"
+                "Keras "
             ]
         }
     ]
