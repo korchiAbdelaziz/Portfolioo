@@ -1,0 +1,17 @@
+{
+  "profile": {
+    "fullName": "Abdelaziz KORCHI",
+    "title": "Futur Ingénieur en Informatique & Réseaux",
+    "description": "Étudiant en cycle d'Ingénieur Informatique & Réseaux à l'EMSI, en parallèle d'un Master MBDS à l'Université Côte d'Azur (France). Passionné par le développement full-stack, la data engineering et l'IA, je conçois des solutions performantes et orientées utilisateur. Actuellement à la recherche d'un stage PFE de 4 à 6 mois à partir de février 2026, afin de mettre mes compétences en pratique et contribuer à des projets innovants.",
+    "photo": "Data/Images/Profil.png",
+    "cv_link": "Data/Korchi_Abdelaziz_CV.pdf",
+    "location": "Casablanca, Maroc",
+    "email": "abdelazizkorchii@gmail.com",
+    "phone": "+212 714 515 588",
+    "social": {
+      "github": "https://github.com/korchiAbdelaziz",
+      "linkedin": "https://www.linkedin.com/in/abdelaziz-korchi-a92ab8244/",
+      "youtube": "https://www.youtube.com/@KorchiAbdelaziz"
+    }
+  }
+}

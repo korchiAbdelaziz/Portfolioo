@@ -1,0 +1,58 @@
+{
+  "skills": {
+    "core": [
+      "Python",
+      "SQL",
+      "Java",
+      "JavaScript",
+      "TypeScript"
+    ],
+    "data_ai": [
+      "Data Engineering",
+      "ETL Pipelines",
+      "Big Data",
+      "Data Warehousing",
+      "Machine Learning",
+      "Deep Learning",
+      "NLP",
+      "LLM (Local)",
+      "Computer Vision",
+      "OCR",
+      "Pandas",
+      "NumPy",
+      "OpenCV",
+      "TensorFlow",
+      "Keras"
+    ],
+    "web_mobile": [
+      "React",
+      "React Native",
+      "Node.js",
+      "Express.js",
+      "REST API",
+      "Firebase",
+      "Android"
+    ],
+    "cloud_devops": [
+      "Docker",
+      "CI/CD",
+      "Git",
+      "GitHub",
+      "GitHub Actions",
+      "AWS",
+      "Azure",
+      "Cloud Computing",
+      "Linux",
+      "Microservices"
+    ],
+    "enterprise_tools": [
+      "Odoo ERP",
+      "Apache Superset"
+    ],
+    "ui_ux": [
+      "Figma",
+      "TailwindCSS",
+      "Bootstrap"
+    ]
+  }
+}

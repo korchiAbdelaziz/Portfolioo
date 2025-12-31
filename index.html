@@ -1,339 +1,1021 @@
 <!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdelaziz Korchi | Portfolio Vault</title>
+    <title>Portfolio | Abdelaziz KORCHI - Ingénieur IA & Full-Stack</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
-
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --blue-primary: #2563eb;
+            --blue-hover: #1d4ed8;
+            --zinc-900: #18181b;
+            --zinc-800: #27272a;
+        }
+        
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background: #050505;
             color: white;
+            overflow-x: hidden;
         }
-
-        /* Correction Navbar : Scroll-padding pour éviter de cacher les titres */
-        html {
-            scroll-padding-top: 110px;
-        }
-
-        .glass-nav {
-            background: rgba(5, 5, 5, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid #3b82f6;
-        }
-
-        /* Timeline : Aligné et trait continu */
-        .timeline-line {
-            position: absolute;
-            left: 8px;
+        
+        /* Navbar */
+        .navbar {
+            position: fixed;
             top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, #3b82f6, #60a5fa);
-        }
-
-        /* Style Vault (Bleu) pour Cartes */
-        .card-vault {
-            border: 1px solid #1e293b;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
-            background: #0f172a;
-            border-radius: 2rem;
-            overflow: hidden;
         }
-
-        .card-vault:hover {
-            border-color: #3b82f6;
-            background: #1e293b;
+        
+        .navbar.scrolled {
+            background: rgba(5, 5, 5, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
-
-        .active-page {
-            background: #3b82f6 !important;
-            color: white !important;
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
         }
-
-        /* Logos Expériences carrés avec lueur */
-        .company-logo-container {
-            width: 94px;
-            height: 94px;
-            border-radius: 16px;
-            padding: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(59, 130, 246, 0.1);
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .bubble-skill {
+        
+        .nav-link::after {
+            content: '';
             position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--blue-primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .nav-link:hover {
+            color: var(--blue-primary);
+            transform: translateY(-2px);
+        }
+        
+        /* Glass effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-hover:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(37, 99, 235, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
+        }
+        
+        /* 3D Tilt Effect */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+        }
+        
+        /* Hero Gradient */
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 60%);
+        }
+        
+        /* Profile Float Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+        
+        .profile-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--blue-primary);
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: var(--blue-hover);
+        }
+        
+        /* Click Feedback */
+        .click-feedback {
+            transition: transform 0.1s ease, box-shadow 0.3s ease;
+        }
+        
+        .click-feedback:active {
+            transform: scale(0.95);
+        }
+        
+        /* Glow Effect */
+        .glow-on-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .glow-on-hover:hover {
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+        }
+        
+        /* Section Animations */
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        /* S'assurer que les sections sont visibles par défaut */
+        section, footer {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        
+        /* Optimisations de performance */
+        * {
+            will-change: auto;
+        }
+        
+        .tilt-card, .glass-hover {
+            will-change: transform;
+        }
+        
+        img, iframe {
+            content-visibility: auto;
+        }
+        
+        /* Bannière PFE - Très Visible */
+        #pfe-banner {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+        
+        #pfe-banner p {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Badge PFE dans Hero */
+        #pfe-badge {
+            transform: scale(0.8);
+        }
+        
+        /* Certifications - Meilleure lisibilité */
+        #certs-grid iframe {
+            background: white !important;
+        }
+        
+        #certs-grid .glass {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .tilt-card {
+                transform: none !important;
+            }
+            
+            .profile-float {
+                animation-duration: 8s;
+            }
+        }
+        
+        /* Modal Backdrop */
+        .modal-backdrop {
+            backdrop-filter: blur(10px);
+        }
+        
+        /* PDF Frame */
+        .pdf-frame {
             pointer-events: none;
-            font-weight: 900;
-            color: #a855f7;
-            opacity: 0.7;
-            font-size: 0.75rem;
-            text-transform: uppercase;
+        }
+        
+        .pdf-frame:hover {
+            pointer-events: auto;
         }
     </style>
 </head>
 
-<body class="bg-[#050505]">
-
-    <nav class="glass-nav fixed top-0 w-full z-50 p-4">
-        <div class="container mx-auto flex justify-between items-center text-[#3b82f6] font-black italic uppercase">
-            <div class="flex items-center gap-2 text-xl md:text-2xl">
-                <i data-lucide="shield-check"></i> AK VAULT
+<body class="custom-scrollbar">
+    
+    <!-- Navbar Intelligente -->
+    <nav id="navbar" class="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-xl font-bold text-blue-400">AK</div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#hero" class="nav-link active" data-section="hero">Accueil</a>
+                    <a href="#about" class="nav-link" data-section="about">À Propos</a>
+                    <a href="#projects" class="nav-link" data-section="projects">Projets</a>
+                    <a href="#certs" class="nav-link" data-section="certs">Certifications</a>
+                    <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
             </div>
-            <div class="hidden md:flex gap-8 text-[11px] text-slate-400 font-bold uppercase">
-                <a href="#hero" class="hover:text-[#3b82f6]">Accueil</a>
-                <a href="#projects" class="hover:text-[#3b82f6]">Projets</a>
-                <a href="#experience" class="hover:text-[#3b82f6]">Expériences</a>
-                <a href="#certs" class="hover:text-[#3b82f6]">Certifications</a>
-            </div>
-            <div class="flex gap-4">
-                <a id="nav-yt" href="#" class="hover:text-red-500 transition"><i data-lucide="youtube"></i></a>
-                <a id="nav-gh" href="#" class="hover:text-white transition"><i data-lucide="github"></i></a>
-                <a id="nav-li" href="#" class="hover:text-white transition"><i data-lucide="linkedin"></i></a>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <div class="flex flex-col gap-4">
+                <a href="#hero" class="nav-link active" data-section="hero">Accueil</a>
+                <a href="#about" class="nav-link" data-section="about">À Propos</a>
+                <a href="#projects" class="nav-link" data-section="projects">Projets</a>
+                <a href="#certs" class="nav-link" data-section="certs">Certifications</a>
+                <a href="#contact" class="nav-link" data-section="contact">Contact</a>
             </div>
         </div>
     </nav>
 
-    <header id="hero" class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden px-6">
-        <div id="bubble-zone" class="absolute inset-0 z-0"></div>
-        <div class="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-10">
-            <div class="text-left order-2 lg:order-1">
-                <h1 id="hero-name" class="text-5xl md:text-7xl font-black mb-6 italic uppercase tracking-tighter"></h1>
-                <p id="hero-desc" class="text-zinc-400 text-lg mb-8 max-w-xl"></p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#projects"
-                        class="bg-[#3b82f6] text-white px-8 py-4 rounded-full font-black uppercase text-xs italic tracking-widest shadow-lg shadow-blue-500/20">Voir
-                        Projets</a>
-                    <a id="cv-download" href="Data/Korchi_Abdelaziz_CV.pdf" download="Korchi_Abdelaziz_CV.pdf"
-                        class="border-2 border-[#3b82f6]/20 text-[#3b82f6] px-8 py-4 rounded-full font-black uppercase text-xs italic flex items-center gap-2 hover:bg-[#3b82f6] hover:text-white transition-all">
-                        <i data-lucide="download"></i> Télécharger CV
-                    </a>
+    <!-- Bannière PFE - Très Visible et Lisible -->
+    <div id="pfe-banner" class="fixed top-0 left-0 right-0 z-[200] bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 text-white py-4 px-6 shadow-2xl transform -translate-y-full transition-transform duration-500 border-b-4 border-yellow-400">
+        <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-4">
+            <div class="flex items-center gap-4 flex-1 min-w-[300px]">
+                <div class="bg-white/30 rounded-full p-3 animate-pulse shadow-lg">
+                    <i class="fas fa-briefcase text-2xl"></i>
+                </div>
+                <div>
+                    <p class="font-extrabold text-lg md:text-xl mb-1 flex items-center gap-2">
+                        <span class="text-yellow-300 animate-bounce">🔍</span>
+                        <span>RECHERCHE STAGE PFE</span>
+                    </p>
+                    <p class="text-sm md:text-base font-semibold opacity-95">4 à 6 mois | Février 2026 | Ingénieur IA & Full-Stack</p>
                 </div>
             </div>
-            <div class="relative flex justify-center items-center order-1 lg:order-2 h-[400px]">
-                <img id="profile-img" src=""
-                    class="relative w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-8 border-white/5 shadow-2xl z-10">
+            <div class="flex items-center gap-4">
+                <a href="#contact" class="bg-white text-blue-600 hover:bg-yellow-300 hover:text-blue-900 px-8 py-3 rounded-full font-bold text-base transition-all click-feedback shadow-lg transform hover:scale-105">
+                    <i class="fas fa-envelope mr-2"></i>Me Contacter
+                </a>
+                <button onclick="closePfeBanner()" class="text-white/90 hover:text-white hover:bg-white/20 rounded-full p-2 transition-all">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
             </div>
         </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden hero-gradient px-6 pt-24">
+        <div class="z-10 flex flex-col items-center text-center">
+            <div class="relative mb-10 profile-float">
+                <div class="absolute inset-0 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+                <img id="profile-img" src="" alt="Abdelaziz Korchi"
+                    class="relative w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-4 border-white/10 p-2 bg-zinc-900 glow-on-hover">
+            </div>
+
+            <h1 id="user-name" class="text-6xl md:text-9xl font-extrabold tracking-tighter mb-4 opacity-0"></h1>
+            <p id="user-title" class="text-blue-500 text-lg md:text-2xl font-medium tracking-[0.3em] uppercase opacity-0 mb-4"></p>
+            
+            <!-- Badge PFE dans le Hero -->
+            <div class="mb-6 opacity-0" id="pfe-badge">
+                <span class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-bold text-sm md:text-base shadow-xl animate-pulse">
+                    <i class="fas fa-search"></i>
+                    <span>Recherche Stage PFE | Février 2026</span>
+                </span>
+            </div>
+            
+            <p id="user-description" class="text-zinc-300 text-base md:text-lg max-w-3xl leading-relaxed opacity-0 mb-8"></p>
+
+            <div id="hero-actions" class="mt-12 flex flex-wrap gap-6 justify-center opacity-0">
+                <a href="#projects" class="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-full font-bold transition-all click-feedback glow-on-hover">
+                    <i class="fas fa-rocket mr-2"></i>Mes Projets
+                </a>
+                <a href="#contact" class="glass px-10 py-4 rounded-full font-bold hover:bg-white/5 transition-all click-feedback">
+                    <i class="fas fa-envelope mr-2"></i>Me Contacter
+                </a>
+            </div>
+        </div>
+
+        <!-- Parallax Background -->
+        <div class="absolute top-1/4 -left-20 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] parallax-bg" data-depth="0.2"></div>
+        <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px] parallax-bg" data-depth="0.4"></div>
     </header>
 
-    <section id="experience" class="py-24 px-6 max-w-4xl mx-auto">
-        <h2 class="text-3xl font-black italic uppercase mb-16 text-center tracking-tighter">Parcours <span
-                class="text-[#3b82f6]">Professionnel</span></h2>
-        <div class="relative" id="experience-list">
-            <div class="timeline-line"></div>
+    <!-- Projects Section -->
+    <section id="projects" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="flex items-end justify-between mb-16">
+            <div>
+                <span class="text-blue-500 font-bold tracking-widest uppercase text-sm">Portfolio</span>
+                <h2 class="text-5xl font-bold mt-2">Projets Réalisés</h2>
+            </div>
+            <div class="hidden md:block h-px flex-grow mx-10 bg-white/10"></div>
+        </div>
+
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
         </div>
     </section>
 
-    <section id="projects" class="py-24 px-4 bg-[#050505]">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-black italic uppercase mb-12 border-l-4 border-[#3b82f6] pl-4">Projets <span
-                    class="text-[#3b82f6]">Sélectionnés</span></h2>
-            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-        </div>
-    </section>
-
-    <section id="certs" class="py-24 px-4 border-t border-slate-900">
-        <div class="container mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-                <div class="w-full md:w-1/2">
-                    <h2 class="text-3xl font-black italic uppercase mb-4">Certifications <span
-                            class="text-[#3b82f6]">Sélectionnées</span></h2>
-                    <div class="relative">
-                        <i data-lucide="search"
-                            class="absolute left-4 top-1/2 -translate-y-1/2 text-[#3b82f6] w-4 h-4"></i>
-                        <input type="text" id="cert-search" oninput="resetCerts()"
-                            placeholder="Filtrer (Python, SQL, Cloud...)"
-                            class="w-full bg-[#111827] border border-slate-800 p-4 pl-12 rounded-xl text-sm outline-none focus:border-[#3b82f6]">
+    <!-- Section À Propos / Qui Je Suis -->
+    <section id="about" class="py-24 px-6 bg-gradient-to-b from-zinc-950 to-zinc-900 border-y border-white/5">
+        <div class="max-w-5xl mx-auto text-center">
+            <span class="text-blue-500 font-bold tracking-widest uppercase text-sm">À Propos</span>
+            <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-8">Qui Je Suis</h2>
+            <div class="glass rounded-3xl p-8 md:p-12 text-left">
+                <div class="flex items-start gap-6 mb-6">
+                    <div class="bg-blue-600/20 rounded-full p-4">
+                        <i class="fas fa-graduation-cap text-blue-400 text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold mb-3 text-white">Formation</h3>
+                        <p class="text-zinc-300 leading-relaxed text-lg">
+                            Étudiant en cycle d'Ingénieur Informatique & Réseaux à l'EMSI, en parallèle d'un Master MBDS à l'Université Côte d'Azur (France). Spécialisé en développement full-stack, data engineering et intelligence artificielle.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-6 mb-6">
+                    <div class="bg-purple-600/20 rounded-full p-4">
+                        <i class="fas fa-code text-purple-400 text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold mb-3 text-white">Expertise</h3>
+                        <p class="text-zinc-300 leading-relaxed text-lg">
+                            Passionné par la conception de solutions performantes et orientées utilisateur. Expérience en Python, React, Data Engineering, Machine Learning, et développement d'agents intelligents avec LLM local.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-6">
+                    <div class="bg-yellow-500/20 rounded-full p-4">
+                        <i class="fas fa-briefcase text-yellow-400 text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold mb-3 text-white">Recherche Stage PFE</h3>
+                        <p class="text-zinc-300 leading-relaxed text-lg mb-4">
+                            <strong class="text-blue-400">Actuellement à la recherche d'un stage PFE de 4 à 6 mois à partir de Février 2026.</strong> 
+                            Je souhaite mettre mes compétences en pratique et contribuer à des projets innovants dans le domaine de l'IA, du développement web ou de la data engineering.
+                        </p>
+                        <a href="#contact" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold transition-all click-feedback glow-on-hover">
+                            <i class="fas fa-envelope"></i>
+                            <span>Me Contacter pour un Stage</span>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div id="certs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"></div>
-            <div id="pagination" class="flex justify-center gap-2"></div>
         </div>
     </section>
 
-    <section id="languages" class="py-24 px-6 max-w-5xl mx-auto">
-        <div id="languages-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+    <!-- Certifications Section -->
+    <section id="certs" class="py-32 bg-zinc-950/50 border-y border-white/5 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-blue-500 font-bold tracking-widest uppercase text-sm">Compétences</span>
+                <h2 class="text-4xl font-bold mt-2">Certifications & Diplômes</h2>
+                <p class="text-zinc-400 mt-4 max-w-2xl mx-auto">Cliquez sur une certification pour l'agrandir et la voir en détail</p>
+            </div>
+            <div id="certs-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
+            </div>
+        </div>
     </section>
 
-    <footer class="py-16 glass-nav border-t border-slate-800 px-6 mt-20 text-center md:text-left">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
-            <div><span class="text-3xl font-black italic text-[#3b82f6]">AK VAULT.</span></div>
-            <div id="footer-contact" class="space-y-2 text-zinc-400 text-sm"></div>
-            <div class="flex justify-center md:justify-end gap-6 text-[#3b82f6]">
-                <a id="foot-gh" href="#"><i data-lucide="github"></i></a>
-                <a id="foot-li" href="#"><i data-lucide="linkedin"></i></a>
+    <!-- Contact Section -->
+    <footer id="contact" class="py-20 text-center border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-6">
+            <h3 class="text-3xl font-bold mb-4">On travaille ensemble ?</h3>
+            <p id="footer-email" class="text-blue-400 text-xl mb-8"></p>
+            <div class="flex justify-center gap-8 text-3xl text-zinc-500">
+                <a id="link-linkedin" href="#" target="_blank" class="hover:text-blue-400 transition-all click-feedback">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a id="link-github" href="#" target="_blank" class="hover:text-blue-400 transition-all click-feedback">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a id="link-Youtube" href="#" target="_blank" class="hover:text-blue-400 transition-all click-feedback">
+                    <i class="fab fa-youtube"></i>
+                </a>
             </div>
         </div>
     </footer>
 
-    <div id="modal" class="hidden fixed inset-0 bg-black/95 z-[200] flex items-center justify-center p-0 md:p-6"
-        onclick="closeModal()">
-        <div class="bg-[#111827] w-full h-full md:h-auto md:max-w-6xl md:rounded-[2rem] overflow-hidden flex flex-col md:flex-row shadow-2xl relative"
-            onclick="event.stopPropagation()">
-            <button onclick="closeModal()" class="absolute top-6 right-6 z-10 text-[#3b82f6]"><i data-lucide="x-circle"
-                    class="w-10 h-10"></i></button>
-            <div id="modal-media" class="md:w-3/5 bg-black min-h-[350px] flex items-center justify-center"></div>
-            <div id="modal-info" class="md:w-2/5 p-8 flex flex-col justify-center bg-[#111827] text-left"></div>
+    <!-- Modal Projet -->
+    <div id="video-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 modal-backdrop">
+        <div class="absolute inset-0 bg-black/95" onclick="closeModal()"></div>
+        <button onclick="closeModal()" class="absolute top-8 right-8 text-white/50 hover:text-white text-5xl transition-all z-[110] click-feedback">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="relative max-w-5xl w-full flex flex-col gap-6 z-[105]" id="modal-content">
+            <div class="relative group">
+                <div class="absolute -inset-1 bg-blue-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition"></div>
+                <video id="modal-video" controls class="relative w-full rounded-2xl border border-white/10 shadow-2xl"></video>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 px-2">
+                <div>
+                    <h3 id="modal-title" class="text-3xl font-bold text-white tracking-tight"></h3>
+                    <p id="modal-desc" class="text-zinc-400 mt-2 max-w-2xl"></p>
+                </div>
+                <a id="modal-source" href="#" target="_blank" class="bg-white text-black hover:bg-blue-600 hover:text-white px-8 py-4 rounded-full font-bold flex items-center gap-3 transition-all whitespace-nowrap click-feedback glow-on-hover">
+                    <i class="fab fa-github"></i> Code Source
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Certification -->
+    <div id="cert-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 modal-backdrop">
+        <div class="absolute inset-0 bg-black/95" onclick="closeCertModal()"></div>
+        <button onclick="closeCertModal()" class="absolute top-8 right-8 text-white/50 hover:text-white text-5xl transition-all z-[110] click-feedback">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="relative max-w-4xl w-full z-[105]" id="cert-modal-content">
+            <iframe id="cert-pdf" src="" class="w-full h-[80vh] rounded-2xl border border-white/10"></iframe>
         </div>
     </div>
 
     <script>
-        let allCerts = [], filteredCerts = [], currentPage = 1, globalProjects = [];
-        const certsPerPage = 8;
-        const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
-
-        async function init() {
-            const [info, projs, certs] = await Promise.all([
-                fetch('Data/info.json').then(r => r.json()),
-                fetch('Data/projets.json').then(r => r.json()),
-                fetch('Data/certifs.json').then(r => r.json())
-            ]);
-
-            const p = info.profile;
-            document.getElementById('hero-name').innerText = p.fullName;
-            document.getElementById('hero-desc').innerText = p.description;
-            document.getElementById('profile-img').src = "Data/abdelaziz.png";
-            document.getElementById('cv-download').href = p.cv_link;
-            document.getElementById('footer-contact').innerHTML = `<p>${p.email}</p><p>${p.phone}</p><p>${p.location}</p>`;
-            document.getElementById('nav-gh').href = document.getElementById('foot-gh').href = p.social.github;
-            document.getElementById('nav-li').href = document.getElementById('foot-li').href = p.social.linkedin;
-            document.getElementById('nav-yt').href = p.social.youtube;
-
-            // Expériences
-            const expList = document.getElementById('experience-list');
-            p.experiences.forEach(ex => {
-                expList.innerHTML += `
-                    <div class="relative pl-12 pb-16 group">
-                        <div class="absolute left-[-1px] top-4 w-4 h-4 bg-[#3b82f6] rounded-full border-4 border-black z-10"></div>
-                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-4">
-                            <div>
-                                <h3 class="text-2xl font-bold italic text-white">${ex.role}</h3>
-                                <p class="text-[#3b82f6] font-black uppercase text-xs mt-1 tracking-widest">${ex.company}</p>
-                            </div>
-                            <div class="company-logo-container shadow-blue-500/20 shadow-xl">
-                                <img src="${ex.logo}" class="max-h-full max-w-full object-contain filter">
+        // GSAP Setup
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Data Storage
+        let projectData = [];
+        let certificationsData = [];
+        
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Navbar Scroll Effect
+        let lastScroll = 0;
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+        
+        // Active Section Highlight
+        const sections = document.querySelectorAll('section[id], header[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        function updateActiveNav() {
+            let current = '';
+            const scrollY = window.pageYOffset;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-section') === current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveNav);
+        
+        // Smooth Scroll for Nav Links
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // Close mobile menu
+                    document.getElementById('mobile-menu')?.classList.add('hidden');
+                }
+            });
+        });
+        
+        // 3D Tilt Effect
+        function initTiltEffect() {
+            const cards = document.querySelectorAll('.tilt-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    if (window.innerWidth <= 768) return;
+                    
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                });
+            });
+        }
+        
+        // Parallax Effect - Optimisé avec throttling
+        let parallaxTimeout;
+        document.addEventListener("mousemove", (e) => {
+            if (parallaxTimeout) return;
+            
+            parallaxTimeout = requestAnimationFrame(() => {
+                const parallaxElements = document.querySelectorAll(".parallax-bg");
+                const x = (window.innerWidth - e.pageX * 2) / 100;
+                const y = (window.innerHeight - e.pageY * 2) / 100;
+                
+                parallaxElements.forEach(el => {
+                    const depth = parseFloat(el.getAttribute("data-depth"));
+                    el.style.transform = `translate(${x * depth}px, ${y * depth}px)`;
+                });
+                
+                parallaxTimeout = null;
+            });
+        });
+        
+        // Load Portfolio Data
+        async function loadPortfolio() {
+            try {
+                // Charger les données avec gestion d'erreur améliorée
+                const profileRes = await fetch('Data/Json/profile.json');
+                if (!profileRes.ok) throw new Error(`Erreur profile.json: ${profileRes.status}`);
+                const profile = await profileRes.json();
+                
+                const projsRes = await fetch('Data/Json/projets.json');
+                if (!projsRes.ok) throw new Error(`Erreur projets.json: ${projsRes.status}`);
+                const projs = await projsRes.json();
+                
+                const certsRes = await fetch('Data/Json/certifs.json');
+                if (!certsRes.ok) throw new Error(`Erreur certifs.json: ${certsRes.status}`);
+                const certs = await certsRes.json();
+                
+                // Corriger les chemins des projets
+                projectData = projs.projects.map(p => ({
+                    ...p,
+                    media: p.media.replace('Data/projects/', 'Data/Demo_projects/'),
+                    thumbnail: p.thumbnail.replace('Data/projects/', 'Data/Demo_projects/')
+                }));
+                
+                // S'assurer que les chemins des certifications sont corrects
+                certificationsData = certs.map(c => ({
+                    ...c,
+                    image: c.image.startsWith('Data/') ? c.image : `Data/certif/${c.image}`
+                }));
+                
+                // Profile Info
+                const profileData = profile.profile;
+                if (document.getElementById('profile-img')) {
+                    document.getElementById('profile-img').src = profileData.photo;
+                }
+                if (document.getElementById('user-name')) {
+                    document.getElementById('user-name').innerText = profileData.fullName;
+                }
+                if (document.getElementById('user-title')) {
+                    document.getElementById('user-title').innerText = profileData.title;
+                }
+                if (document.getElementById('user-description')) {
+                    // Mettre à jour la description avec février 2026
+                    let description = profileData.description || '';
+                    description = description.replace(/février[^.]*/gi, 'février 2026');
+                    if (!description.includes('2026')) {
+                        description = description.replace(/février/gi, 'février 2026');
+                    }
+                    document.getElementById('user-description').innerText = description;
+                }
+                if (document.getElementById('footer-email')) {
+                    document.getElementById('footer-email').innerText = profileData.email;
+                }
+                if (document.getElementById('link-linkedin')) {
+                    document.getElementById('link-linkedin').href = profileData.social.linkedin;
+                }
+                if (document.getElementById('link-github')) {
+                    document.getElementById('link-github').href = profileData.social.github;
+                }
+                if (document.getElementById('link-Youtube')) {
+                    document.getElementById('link-Youtube').href = profileData.social.youtube;
+                }
+                
+                
+                // Hero Animations
+                const tl = gsap.timeline();
+                tl.to("#user-name", { opacity: 1, y: 0, duration: 1, ease: "power3.out" })
+                  .to("#user-title", { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.5")
+                  .to("#pfe-badge", { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.7)" }, "-=0.3")
+                  .to("#user-description", { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.5")
+                  .to("#hero-actions", { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.5");
+                
+                console.log('Données chargées:', {
+                    profile: profileData.fullName,
+                    projects: projectData.length,
+                    certifications: certificationsData.length
+                });
+                
+                // S'assurer que les sections sont visibles
+                const projectsSection = document.getElementById('projects');
+                const certsSection = document.getElementById('certs');
+                const contactSection = document.getElementById('contact');
+                
+                if (projectsSection) {
+                    projectsSection.style.opacity = '1';
+                    projectsSection.style.transform = 'translateY(0)';
+                }
+                if (certsSection) {
+                    certsSection.style.opacity = '1';
+                    certsSection.style.transform = 'translateY(0)';
+                }
+                if (contactSection) {
+                    contactSection.style.opacity = '1';
+                    contactSection.style.transform = 'translateY(0)';
+                }
+                
+                // Charger les projets et certifications de manière asynchrone pour meilleure performance
+                requestAnimationFrame(() => {
+                    loadProjects();
+                });
+                
+                requestAnimationFrame(() => {
+                    loadCertifications();
+                });
+                
+                // Afficher la bannière PFE
+                showPfeBanner();
+                
+                // Init animations after content loaded - Optimisé
+                requestAnimationFrame(() => {
+                    initScrollAnimations();
+                    initTiltEffect();
+                });
+                
+            } catch (err) {
+                console.error("Erreur chargement JSON:", err);
+                // Afficher un message d'erreur visible à l'utilisateur
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-6 py-4 rounded-lg z-50';
+                errorDiv.innerHTML = `<strong>Erreur de chargement:</strong> ${err.message}`;
+                document.body.appendChild(errorDiv);
+                setTimeout(() => errorDiv.remove(), 5000);
+            }
+        }
+        
+        // Load Projects
+        function loadProjects() {
+            console.log('loadProjects appelé, projectData:', projectData);
+            const pGrid = document.getElementById('projects-grid');
+            if (!pGrid) {
+                console.error('projects-grid element not found');
+                return;
+            }
+            
+            if (!projectData || projectData.length === 0) {
+                console.warn('Aucun projet à afficher, projectData:', projectData);
+                pGrid.innerHTML = '<p class="text-zinc-400 text-center col-span-full py-10">Aucun projet disponible</p>';
+                return;
+            }
+            
+            console.log(`Affichage de ${projectData.length} projets`);
+            pGrid.innerHTML = '';
+            
+            projectData.forEach((p, index) => {
+                console.log(`Création carte projet ${index + 1}:`, p.title);
+                const card = document.createElement('div');
+                card.className = 'glass rounded-3xl overflow-hidden group cursor-pointer border border-white/10 transition-all duration-500 flex flex-col h-full tilt-card click-feedback';
+                card.onclick = () => openProject(p.id);
+                
+                card.innerHTML = `
+                    <div class="relative h-64 overflow-hidden bg-zinc-900/50 rounded-t-3xl">
+                        <img loading="lazy" src="${p.thumbnail}" alt="${p.title}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div class="absolute inset-0 bg-blue-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                            <div class="bg-white text-black w-14 h-14 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                                <i class="fas fa-play ml-1"></i>
                             </div>
                         </div>
-                        <p class="text-zinc-500 text-sm mb-6">${ex.desc}</p>
-                        <div class="flex flex-wrap gap-2">${ex.badges.map(b => `<span class="bg-blue-600/10 text-[#3b82f6] px-3 py-1 rounded-lg text-[10px] font-black uppercase border border-blue-500/20 italic">#${b}</span>`).join('')}</div>
-                    </div>`;
-            });
-
-            // Langues
-            const langGrid = document.getElementById('languages-grid');
-            p.languages.forEach(l => {
-                langGrid.innerHTML += `
-                    <div class="bg-[#111827] p-8 rounded-3xl text-center border border-slate-800">
-                     
-                        <h4 class="font-black italic uppercase text-[#3b82f6]">${l.name}</h4>
-                        <p class="text-zinc-500 text-[10px] font-bold uppercase mt-2">${l.level}</p>
-                    </div>`;
-            });
-
-            globalProjects = projs.projects; allCerts = certs;
-            createBubbles(p.skills_bubbles); renderProjects(); resetCerts();
-            lucide.createIcons();
-        }
-
-        function createBubbles(skills) {
-            const zone = document.getElementById('bubble-zone');
-            skills.forEach(skill => {
-                const b = document.createElement('div'); b.className = "bubble-skill"; b.innerText = skill;
-                zone.appendChild(b); gsap.set(b, { x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight, opacity: 0 });
-                gsap.to(b, { opacity: 0.6, duration: 15, repeat: -1, yoyo: true });
+                    </div>
+                    <div class="p-6 lg:p-8 flex-grow flex flex-col">
+                        <h3 class="text-xl lg:text-2xl font-bold mb-3 group-hover:text-blue-400 transition-colors text-white line-clamp-2">${p.title}</h3>
+                        <p class="text-zinc-400 text-sm mb-4 line-clamp-3 leading-relaxed flex-grow">${p.description}</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            ${p.skills.slice(0, 4).map(s => `<span class="text-[10px] font-bold bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg uppercase tracking-wider text-zinc-300 group-hover:border-blue-500/50 transition-colors">${s}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+                
+                pGrid.appendChild(card);
+                
+                // Animation optimisée - seulement si visible
+                if (index < 6) { // Animer seulement les 6 premiers pour performance
+                    gsap.from(card, {
+                        opacity: 0,
+                        y: 30,
+                        duration: 0.4,
+                        delay: index * 0.05,
+                        ease: "power2.out"
+                    });
+                } else {
+                    card.style.opacity = '1';
+                }
             });
         }
-
-        function renderProjects() {
-            const grid = document.getElementById('projects-grid');
-            grid.innerHTML = globalProjects.map(p => `
-                <div onclick='openProject(${p.id})' class="card-vault cursor-pointer group">
-                    <div class="h-56 relative bg-slate-900 overflow-hidden">
-                        <img src="${p.thumbnail}" class="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition">
-                        <div class="absolute inset-0 bg-blue-900/20 flex items-center justify-center"><i data-lucide="play-circle" class="w-12 h-12 text-[#3b82f6]"></i></div>
+        
+        // Load Certifications
+        function loadCertifications() {
+            console.log('loadCertifications appelé, certificationsData:', certificationsData);
+            const cGrid = document.getElementById('certs-grid');
+            if (!cGrid) {
+                console.error('certs-grid element not found');
+                return;
+            }
+            
+            if (!certificationsData || certificationsData.length === 0) {
+                console.warn('Aucune certification à afficher, certificationsData:', certificationsData);
+                cGrid.innerHTML = '<p class="text-zinc-400 text-center col-span-full py-10">Aucune certification disponible</p>';
+                return;
+            }
+            
+            console.log(`Affichage de ${certificationsData.length} certifications`);
+            cGrid.innerHTML = '';
+            
+            certificationsData.forEach((c, index) => {
+                console.log(`Création carte certification ${index + 1}:`, c.title);
+                const card = document.createElement('div');
+                card.className = 'p-6 glass rounded-2xl flex flex-col items-center text-center border border-white/10 tilt-card glass-hover click-feedback';
+                card.onclick = () => openCertModal(c.image);
+                
+                card.innerHTML = `
+                    <div class="w-full h-56 mb-4 rounded-xl overflow-hidden bg-white border-2 border-white/20 group-hover:border-blue-500 transition-all relative shadow-lg">
+                        <iframe loading="lazy" src="${c.image}#toolbar=0&navpanes=0&scrollbar=0&zoom=page-fit" type="application/pdf" class="w-full h-full pdf-frame" frameborder="0" style="background: white;"></iframe>
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/70 opacity-0 hover:opacity-100 transition-opacity cursor-pointer backdrop-blur-sm">
+                            <span class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-colors shadow-xl">
+                                <i class="fas fa-external-link-alt mr-2"></i>Ouvrir en Plein Écran
+                            </span>
+                        </div>
                     </div>
-                    <div class="p-8">
-                        <h3 class="text-xl font-bold mb-4 h-12 line-clamp-2 uppercase italic text-white group-hover:text-[#3b82f6]">${p.title}</h3>
-                        <div class="w-full py-4 border-2 border-[#3b82f6]/20 text-[#3b82f6] text-center rounded-2xl font-black text-[10px] tracking-widest group-hover:bg-[#3b82f6] group-hover:text-white transition uppercase italic">VOIR DÉTAILS</div>
-                    </div>
-                </div>`).join('');
-            lucide.createIcons();
+                    <span class="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-2 line-clamp-1">${c.org}</span>
+                    <h4 class="text-sm lg:text-base font-bold mb-3 leading-tight text-white group-hover:text-blue-400 transition-colors line-clamp-2 min-h-[3rem]">${c.title}</h4>
+                    ${c.verify_link !== "N/A" ? `<a href="${c.verify_link}" target="_blank" onclick="event.stopPropagation()" class="mt-auto text-[10px] text-blue-400 hover:text-blue-300 underline tracking-widest uppercase transition-colors font-semibold">✓ Vérifier</a>` : '<span class="mt-auto text-[10px] text-zinc-500 uppercase tracking-widest">Non vérifiable</span>'}
+                `;
+                
+                cGrid.appendChild(card);
+                
+                // Animation optimisée - seulement si visible
+                if (index < 10) { // Animer seulement les 10 premières pour performance
+                    gsap.from(card, {
+                        opacity: 0,
+                        y: 20,
+                        duration: 0.3,
+                        delay: index * 0.03,
+                        ease: "power2.out"
+                    });
+                } else {
+                    card.style.opacity = '1';
+                }
+            });
         }
-
-        function renderCerts() {
-            const grid = document.getElementById('certs-grid');
-            const start = (currentPage - 1) * certsPerPage;
-            const pageData = filteredCerts.slice(start, start + certsPerPage);
-            grid.innerHTML = pageData.map(c => `
-                <div onclick='openCert(${JSON.stringify(c)})' class="card-vault cursor-pointer group shadow-lg">
-                    <div class="h-44 relative bg-black/40 p-4">
-                        <img src="Data/fake.png" class="w-full h-full object-cover opacity-20">
-                        <div class="absolute top-4 left-4 bg-[#3b82f6] text-white text-[9px] font-black px-2 py-1 rounded italic uppercase">${c.org}</div>
-                    </div>
-                    <div class="p-8">
-                        <p class="text-slate-500 text-[10px] font-bold uppercase mb-2 tracking-widest">${c.date}</p>
-                        <h3 class="text-xl font-bold mb-6 h-14 line-clamp-2 text-white group-hover:text-[#3b82f6] transition-colors uppercase italic leading-tight">${c.title}</h3>
-                        <div class="w-full py-4 border-2 border-[#3b82f6]/20 text-[#3b82f6] text-center rounded-2xl font-black text-[10px] tracking-widest group-hover:bg-[#3b82f6] group-hover:text-white transition uppercase italic">VOIR LE CERTIFICAT</div>
-                    </div>
-                </div>`).join('');
-            renderPagination(); lucide.createIcons();
+        
+        // Scroll Animations - Optimisées
+        function initScrollAnimations() {
+            // Utiliser Intersection Observer pour meilleure performance
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        gsap.to(entry.target, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: "power2.out"
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            const sections = document.querySelectorAll('#about, #projects, #certs, #contact');
+            sections.forEach(section => {
+                gsap.set(section, { opacity: 1, y: 0 });
+                observer.observe(section);
+            });
         }
-
-        function resetCerts() {
-            const q = document.getElementById('cert-search').value.toLowerCase();
-            filteredCerts = allCerts.filter(c => c.title.toLowerCase().includes(q) || c.org.toLowerCase().includes(q));
-            currentPage = 1; renderCerts();
-        }
-
-        function renderPagination() {
-            const total = Math.ceil(filteredCerts.length / certsPerPage);
-            const container = document.getElementById('pagination');
-            container.innerHTML = "";
-            for (let i = 1; i <= total; i++) container.innerHTML += `<button onclick="changePage(${i})" class="w-8 h-8 rounded-lg bg-slate-900 text-[10px] font-bold ${i === currentPage ? 'active-page' : ''}">${i}</button>`;
-        }
-
-        function changePage(p) { currentPage = p; renderCerts(); document.getElementById('certs').scrollIntoView(); }
-
+        
+        // Open Project Modal
         function openProject(id) {
-            const p = globalProjects.find(x => x.id === id); if (!p) return;
-            const modal = document.getElementById('modal');
-            document.getElementById('modal-media').innerHTML = `<video src="${p.media}" controls autoplay class="w-full h-full"></video>`;
-            document.getElementById('modal-info').innerHTML = `
-                <h2 class="text-3xl font-black italic uppercase text-[#3b82f6] mb-4">${p.title}</h2>
-                <p class="text-zinc-400 text-sm mb-8">${p.description}</p>
-                <div class="flex flex-wrap gap-2 mb-10">${p.technologies.map(t => `<span class="bg-slate-800 text-slate-200 px-4 py-2 rounded-xl text-[10px] font-bold italic">#${t.toUpperCase()}</span>`).join('')}</div>
-                <a href="${p.source_link}" target="_blank" class="bg-[#3b82f6] text-white py-4 rounded-2xl text-center font-black uppercase text-xs italic tracking-widest w-full block shadow-xl">📂 CODE SOURCE GITHUB</a>`;
+            const p = projectData.find(proj => proj.id === id);
+            if (!p) return;
+            
+            const modal = document.getElementById('video-modal');
+            const video = document.getElementById('modal-video');
+            
+            document.getElementById('modal-title').innerText = p.title;
+            document.getElementById('modal-desc').innerText = p.description;
+            document.getElementById('modal-source').href = p.source_link;
+            video.src = p.media;
+            
             modal.classList.remove('hidden');
+            
+            // GSAP Animation
+            const tl = gsap.timeline();
+            tl.fromTo(modal, 
+                { opacity: 0 },
+                { opacity: 1, duration: 0.3, ease: "power2.out" }
+            )
+            .fromTo("#modal-content",
+                { scale: 0.8, opacity: 0, y: 50 },
+                { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" },
+                "-=0.2"
+            );
+            
+            video.play();
         }
-
-        function openCert(c) {
-            const modal = document.getElementById('modal');
-            const media = document.getElementById('modal-media');
-            media.innerHTML = isMobile ? `<div class="p-10 text-center"><a href="${c.image}" target="_blank" class="bg-[#3b82f6] px-10 py-5 rounded-2xl font-black uppercase text-xs italic tracking-widest">OUVRIR PDF HD</a></div>` : `<iframe src="${c.image}" class="w-full h-full border-none"></iframe>`;
-            document.getElementById('modal-info').innerHTML = `
-                <h2 class="text-3xl font-black italic uppercase text-[#3b82f6] mb-4">${c.title}</h2>
-                <p class="text-white font-bold text-2xl mb-8">${c.org}</p>
-                <div class="flex flex-wrap gap-2 mb-10">${c.skills.map(s => `<span class="bg-slate-800 text-slate-200 px-4 py-2 rounded-xl text-[10px] font-bold italic">#${s.toUpperCase()}</span>`).join('')}</div>
-                ${c.verify_link !== "N/A" ? `<a href="${c.verify_link}" target="_blank" class="bg-[#3b82f6] text-black px-8 py-4 rounded-2xl font-black text-xs uppercase italic text-center w-full block shadow-lg italic">VÉRIFIER AUTHENTICITÉ</a>` : ''}`;
+        
+        // Close Project Modal
+        function closeModal() {
+            const modal = document.getElementById('video-modal');
+            const video = document.getElementById('modal-video');
+            
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    modal.classList.add('hidden');
+                    video.pause();
+                    video.src = "";
+                }
+            });
+            
+            tl.to("#modal-content", 
+                { scale: 0.8, opacity: 0, y: 50, duration: 0.3, ease: "power2.in" }
+            )
+            .to(modal,
+                { opacity: 0, duration: 0.2, ease: "power2.in" },
+                "-=0.2"
+            );
+        }
+        
+        // Open Certification Modal
+        function openCertModal(pdfSrc) {
+            const modal = document.getElementById('cert-modal');
+            const iframe = document.getElementById('cert-pdf');
+            
+            iframe.src = pdfSrc;
             modal.classList.remove('hidden');
-            lucide.createIcons();
+            
+            // GSAP Animation
+            const tl = gsap.timeline();
+            tl.fromTo(modal,
+                { opacity: 0 },
+                { opacity: 1, duration: 0.3, ease: "power2.out" }
+            )
+            .fromTo("#cert-modal-content",
+                { scale: 0.8, opacity: 0, y: 50 },
+                { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" },
+                "-=0.2"
+            );
         }
-
-        function closeModal() { document.getElementById('modal').classList.add('hidden'); document.getElementById('modal-media').innerHTML = ""; }
-        window.onload = init;
+        
+        // Close Certification Modal
+        function closeCertModal() {
+            const modal = document.getElementById('cert-modal');
+            const iframe = document.getElementById('cert-pdf');
+            
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    modal.classList.add('hidden');
+                    iframe.src = "";
+                }
+            });
+            
+            tl.to("#cert-modal-content",
+                { scale: 0.8, opacity: 0, y: 50, duration: 0.3, ease: "power2.in" }
+            )
+            .to(modal,
+                { opacity: 0, duration: 0.2, ease: "power2.in" },
+                "-=0.2"
+            );
+        }
+        
+        // Click Feedback on all interactive elements - Optimisé
+        document.addEventListener('click', (e) => {
+            const element = e.target.closest('.click-feedback');
+            if (element) {
+                element.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    element.style.transform = '';
+                }, 100);
+            }
+        });
+        
+        // Fonction pour fermer la bannière PFE
+        function closePfeBanner() {
+            const banner = document.getElementById('pfe-banner');
+            if (banner) {
+                gsap.to(banner, {
+                    y: -100,
+                    duration: 0.3,
+                    ease: "power2.in",
+                    onComplete: () => {
+                        banner.style.display = 'none';
+                        localStorage.setItem('pfeBannerClosed', 'true');
+                    }
+                });
+            }
+        }
+        
+        // Afficher la bannière PFE avec animation
+        function showPfeBanner() {
+            const banner = document.getElementById('pfe-banner');
+            const isClosed = localStorage.getItem('pfeBannerClosed');
+            
+            if (banner && !isClosed) {
+                setTimeout(() => {
+                    gsap.to(banner, {
+                        y: 0,
+                        duration: 0.5,
+                        ease: "back.out(1.7)"
+                    });
+                }, 1000);
+            }
+        }
+        
+        // Initialize - Attendre que le DOM soit prêt
+        function init() {
+            console.log('Initialisation du portfolio...');
+            console.log('Éléments DOM:', {
+                projects: document.getElementById('projects'),
+                projectsGrid: document.getElementById('projects-grid'),
+                certs: document.getElementById('certs'),
+                certsGrid: document.getElementById('certs-grid'),
+                contact: document.getElementById('contact')
+            });
+            
+            // S'assurer que les sections sont visibles immédiatement
+            const projectsSection = document.getElementById('projects');
+            const certsSection = document.getElementById('certs');
+            const contactSection = document.getElementById('contact');
+            
+            if (projectsSection) {
+                projectsSection.style.display = 'block';
+                projectsSection.style.opacity = '1';
+                projectsSection.style.visibility = 'visible';
+            }
+            if (certsSection) {
+                certsSection.style.display = 'block';
+                certsSection.style.opacity = '1';
+                certsSection.style.visibility = 'visible';
+            }
+            if (contactSection) {
+                contactSection.style.display = 'block';
+                contactSection.style.opacity = '1';
+                contactSection.style.visibility = 'visible';
+            }
+            
+            loadPortfolio();
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            // DOM déjà chargé
+            init();
+        }
+        
+        // Log de débogage
+        console.log('Script initialisé, état DOM:', document.readyState);
     </script>
 </body>
-
 </html>
