@@ -11,58 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-
-.org-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: yellow;
-    color: black;
-    padding: 4px 12px;
-    border-radius: 99px;
-    font-size: 10px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    z-index: 20;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-.cert-img-container {
-    position: relative;
-    height: 16rem; /* h-64 */
-    width: 100%;
-    background: #111;
-    border-radius: 0.75rem;
-    overflow: hidden;
-}
-
-.cert-img-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.cert-card-container:hover img {
-    transform: scale(1.1);
-}
-        /* Style pour les miniatures de certificats */
-.cert-thumbnail {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background: #f3f4f6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.cert-thumbnail i {
-    font-size: 3rem;
-    color: #2563eb;
-}
-
-
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -96,12 +44,53 @@
         }
         .nav-link.active::after { width: 100%; }
 
-        /* Glass effect */
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        /* Vidéo Wrapper Fix */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9; 
+            background-color: #000;
+            border-radius: 1rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
+        #modal-video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; 
+        }
+
+        @media (max-width: 768px) {
+            .video-wrapper {
+                aspect-ratio: 9 / 16; 
+                max-height: 50vh;
+            }
+        }
+
+        /* Certificats */
+        .org-badge {
+            position: absolute; top: 12px; right: 12px;
+            background: yellow; color: black;
+            padding: 4px 12px; border-radius: 99px;
+            font-size: 10px; font-weight: 800;
+            text-transform: uppercase; z-index: 20;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .cert-img-container {
+            position: relative; height: 16rem; width: 100%;
+            background: #111; border-radius: 0.75rem; overflow: hidden;
+        }
+
+        .cert-img-container img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .cert-card-container:hover img { transform: scale(1.1); }
 
         .profile-float { animation: float 6s ease-in-out infinite; }
         @keyframes float {
@@ -117,20 +106,9 @@
             @apply px-4 py-2 bg-white/5 border border-white/10 rounded-lg hover:bg-blue-600 transition-all disabled:opacity-20 disabled:cursor-not-allowed;
         }
 
-        /* Correction Iframe & Click */
         .cert-card-container { position: relative; }
         .cert-overlay { position: absolute; inset: 0; z-index: 10; cursor: pointer; }
-        
         #pfe-banner { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
-
-        /* Fix pour les vidéos verticales */
-        #modal-video {
-            max-height: 70vh;
-            width: auto;
-            margin: 0 auto;
-            display: block;
-            background: #000;
-        }
     </style>
 </head>
 
@@ -151,8 +129,18 @@
                 <a href="Data/Korchi_Abdelaziz_CV.pdf" download class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 transition-all shadow-lg">
                     <i class="fas fa-download"></i> <span class="hidden sm:inline">Mon CV</span>
                 </a>
-                <button id="mobile-menu-btn" class="md:hidden text-white text-xl"><i class="fas fa-bars"></i></button>
+                <button id="mobile-menu-btn" class="md:hidden text-white text-xl p-2 focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-950 border-t border-white/10 px-6 py-6 space-y-4">
+            <a href="#hero" class="block text-lg font-medium nav-link">Accueil</a>
+            <a href="#about" class="block text-lg font-medium nav-link">À Propos</a>
+            <a href="#experiences" class="block text-lg font-medium nav-link">Expériences</a>
+            <a href="#projects" class="block text-lg font-medium nav-link">Projets</a>
+            <a href="#certs" class="block text-lg font-medium nav-link">Certifications</a>
+            <a href="#contact" class="block text-lg font-medium nav-link">Contact</a>
         </div>
     </nav>
 
@@ -203,9 +191,6 @@
 
         <div class="glass p-10 rounded-3xl border border-blue-500/20 max-w-4xl mx-auto mt-20 text-center">
             <h3 class="text-2xl font-bold mb-4">Envie d'en voir plus ? 🚀</h3>
-            <p class="text-zinc-400 mb-8 max-w-2xl mx-auto leading-relaxed">
-                Cette sélection ne représente qu'une partie de mes travaux. Je partage régulièrement des démonstrations vidéos et le code source complet de mes expérimentations sur GitHub.
-            </p>
             <div class="flex flex-wrap gap-6 justify-center">
                 <a id="github-cta-link" href="#" target="_blank" class="bg-white text-black hover:bg-blue-600 hover:text-white px-8 py-4 rounded-full font-bold flex items-center gap-3 transition-all transform hover:scale-105 shadow-xl">
                     <i class="fab fa-github text-xl"></i>
@@ -226,7 +211,6 @@
                 <div class="inline-block bg-blue-600/20 border border-blue-500/50 text-blue-400 px-6 py-2 rounded-full font-bold text-sm mb-4">
                     <i class="fas fa-certificate mr-2"></i> <span id="cert-count">0</span> Certifications obtenues
                 </div>
-                <p class="text-zinc-400">Affichage de 6 par page</p>
             </div>
             <div id="certs-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
             <div id="certs-pagination" class="flex justify-center items-center gap-4 mt-12"></div>
@@ -256,25 +240,35 @@
         </div>
     </footer>
 
-    <div id="video-modal" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4 bg-black/95">
-        <button onclick="closeModal()" class="absolute top-8 right-8 text-white/50 text-5xl hover:text-white transition-colors"><i class="fas fa-times"></i></button>
-        <div class="relative max-w-5xl w-full flex flex-col items-center gap-6" id="modal-content">
-            <div class="w-full bg-black rounded-2xl overflow-hidden shadow-2xl">
-                <video id="modal-video" controls class="rounded-2xl"></video>
+    <div id="video-modal" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4 bg-black/95 backdrop-blur-sm">
+        <button onclick="closeModal()" class="absolute top-6 right-6 text-white/50 text-4xl hover:text-white transition-all z-[1100]">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="relative glass max-w-5xl w-full rounded-3xl overflow-hidden flex flex-col md:flex-row items-stretch shadow-2xl" id="modal-content">
+            <div class="w-full md:w-3/5 bg-black flex items-center justify-center border-b md:border-b-0 md:border-r border-white/10">
+                <div class="video-wrapper">
+                    <video id="modal-video" controls playsinline>
+                        Votre navigateur ne supporte pas la vidéo.
+                    </video>
+                </div>
             </div>
-            <div class="w-full text-center">
-                <h3 id="modal-title" class="text-3xl font-bold"></h3>
-                <p id="modal-desc" class="text-zinc-400 mt-2"></p>
-                <a id="modal-source" href="#" target="_blank" class="inline-flex items-center gap-2 mt-4 bg-white text-black px-6 py-2 rounded-full font-bold hover:bg-blue-600 hover:text-white transition-all">
-                    <i class="fab fa-github"></i> Code Source
-                </a>
+            <div class="w-full md:w-2/5 p-8 flex flex-col justify-center bg-zinc-900/50">
+                <h3 id="modal-title" class="text-2xl font-bold mb-4 text-white"></h3>
+                <p id="modal-desc" class="text-zinc-400 text-sm leading-relaxed mb-8"></p>
+                <div class="mt-auto">
+                    <a id="modal-source" href="#" target="_blank" class="inline-flex items-center justify-center gap-3 bg-white text-black hover:bg-blue-600 hover:text-white w-full py-4 rounded-full font-bold transition-all shadow-lg">
+                        <i class="fab fa-github"></i>
+                        <span>Code Source</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
     <div id="cert-modal" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4 bg-black/95">
         <button onclick="closeCertModal()" class="absolute top-8 right-8 text-white text-5xl"><i class="fas fa-times"></i></button>
-        <iframe id="cert-pdf" src="" class="w-full max-w-4xl h-[80vh] rounded-2xl bg-white"></iframe>
+        <iframe id="cert-pdf" src="" class="w-full max-w-4xl h-[80vh] rounded-2xl bg-white border-none"></iframe>
     </div>
 
     <script>
@@ -298,7 +292,6 @@
                 certificationsData = await certsRes.json();
                 const experiences = await expRes.json();
 
-                // Profile
                 const p = profile.profile;
                 document.getElementById('profile-img').src = p.photo;
                 document.getElementById('user-name').innerText = p.fullName;
@@ -307,7 +300,6 @@
                 document.getElementById('footer-email').innerText = p.email;
                 document.getElementById('cert-count').innerText = certificationsData.length;
                 
-                // Links update (including the new CTA buttons)
                 document.getElementById('link-linkedin-foot').href = p.social.linkedin;
                 document.getElementById('link-github-foot').href = p.social.github;
                 document.getElementById('link-Youtube-foot').href = p.social.youtube;
@@ -316,7 +308,6 @@
 
                 projectData = projs.projects;
                 
-                // Animations
                 gsap.to("#user-name", { opacity: 1, y: 0, duration: 1 });
                 gsap.to("#user-title", { opacity: 1, y: 0, duration: 1, delay: 0.3 });
                 gsap.to("#pfe-badge", { opacity: 1, scale: 1, duration: 0.5, delay: 0.5 });
@@ -365,78 +356,70 @@
         }
 
         function renderCertificates(page) {
-    currentCertPage = page;
-    const grid = document.getElementById('certs-grid');
-    const totalPages = Math.ceil(certificationsData.length / certsPerPage);
-    const start = (page - 1) * certsPerPage;
-    const pageData = certificationsData.slice(start, start + certsPerPage);
+            currentCertPage = page;
+            const grid = document.getElementById('certs-grid');
+            const totalPages = Math.ceil(certificationsData.length / certsPerPage);
+            const start = (page - 1) * certsPerPage;
+            const pageData = certificationsData.slice(start, start + certsPerPage);
 
-    grid.innerHTML = pageData.map(c => {
-        // Chemin vers votre image miniature personnalisée
-        const fakeThumbnail = "Data/Images/Certif_Fake_Minature.png";
-        // Chemin propre vers le PDF pour le modal
-        const pdfPath = c.image.startsWith('Data/') ? c.image : `Data/certif/${c.image}`;
+            grid.innerHTML = pageData.map(c => {
+                const pdfPath = c.image.startsWith('Data/') ? c.image : `Data/certif/${c.image}`;
+                return `
+                    <div class="cert-card-container glass p-4 rounded-2xl border border-white/10 hover:border-blue-500 transition-all group relative flex flex-col h-full">
+                        <div class="org-badge">${c.org}</div>
+                        <div class="cert-overlay" onclick="openCertModal('${pdfPath}')"></div>
+                        <div class="cert-img-container mb-4">
+                            <img src="Data/Images/Certif_Fake_Minature.png" alt="Miniature">
+                            <div class="absolute inset-0 bg-blue-900/20 group-hover:bg-transparent transition-colors"></div>
+                        </div>
+                        <div class="mt-auto">
+                            <h4 class="font-bold text-white text-sm line-clamp-2">${c.title}</h4>
+                            <div class="flex items-center gap-2 mt-3 text-blue-400 text-[10px] font-bold uppercase tracking-tighter">
+                                <i class="fas fa-search-plus"></i> <span>Agrandir</span>
+                            </div>
+                        </div>
+                    </div>`;
+            }).join('');
 
-        return `
-            <div class="cert-card-container glass p-4 rounded-2xl border border-white/10 hover:border-blue-500 transition-all group relative flex flex-col h-full">
-                <div class="org-badge">${c.org}</div>
-                
-                <div class="cert-overlay" onclick="openCertModal('${pdfPath}')"></div>
-                
-                <div class="cert-img-container mb-4">
-                    <img src="${fakeThumbnail}" alt="Certificat Miniature">
-                    <div class="absolute inset-0 bg-blue-900/20 group-hover:bg-transparent transition-colors"></div>
-                </div>
-                
-                <div class="mt-auto">
-                    <h4 class="font-bold text-white text-sm line-clamp-2 leading-snug">${c.title}</h4>
-                    <div class="flex items-center gap-2 mt-3 text-blue-400 text-[10px] font-bold uppercase tracking-tighter">
-                        <i class="fas fa-search-plus"></i>
-                        <span>Cliquer pour agrandir</span>
-                    </div>
-                </div>
-            </div>
-        `;
-    }).join('');
-
-    // Mise à jour de la pagination
-    const pagination = document.getElementById('certs-pagination');
-    pagination.innerHTML = `
-        <button onclick="renderCertificates(${page - 1})" ${page === 1 ? 'disabled' : ''} class="pagination-btn">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <span class="font-bold text-blue-400">Page ${page} / ${totalPages}</span>
-        <button onclick="renderCertificates(${page + 1})" ${page === totalPages ? 'disabled' : ''} class="pagination-btn">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-    `;
-}
+            document.getElementById('certs-pagination').innerHTML = `
+                <button onclick="renderCertificates(${page - 1})" ${page === 1 ? 'disabled' : ''} class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
+                <span class="font-bold text-blue-400">Page ${page} / ${totalPages}</span>
+                <button onclick="renderCertificates(${page + 1})" ${page === totalPages ? 'disabled' : ''} class="pagination-btn"><i class="fas fa-chevron-right"></i></button>`;
+        }
 
         function openProject(id) {
             const p = projectData.find(proj => proj.id == id);
             if(!p) return;
             const video = document.getElementById('modal-video');
+            const modal = document.getElementById('video-modal');
             video.src = p.media.replace('Data/projects/', 'Data/Demo_projects/');
             document.getElementById('modal-title').innerText = p.title;
             document.getElementById('modal-desc').innerText = p.description;
             document.getElementById('modal-source').href = p.source_link;
-            document.getElementById('video-modal').classList.remove('hidden');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Bloque le scroll arrière
             video.play();
         }
 
         function closeModal() {
-            document.getElementById('video-modal').classList.add('hidden');
-            document.getElementById('modal-video').pause();
+            const modal = document.getElementById('video-modal');
+            const video = document.getElementById('modal-video');
+            modal.classList.add('hidden');
+            video.pause();
+            video.src = "";
+            document.body.style.overflow = 'auto'; // Débloque le scroll
         }
 
         function openCertModal(src) {
             document.getElementById('cert-pdf').src = src;
             document.getElementById('cert-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
         }
 
         function closeCertModal() {
             document.getElementById('cert-modal').classList.add('hidden');
             document.getElementById('cert-pdf').src = "";
+            document.body.style.overflow = 'auto';
         }
 
         function copyToClipboard(text, label) {
@@ -450,8 +433,18 @@
 
         function closePfeBanner() { gsap.to("#pfe-banner", { y: -200 }); }
         function showPfeBanner() { setTimeout(() => gsap.to("#pfe-banner", { y: 0 }), 1500); }
-        document.getElementById('mobile-menu-btn').onclick = () => document.getElementById('mobile-menu').classList.toggle('hidden');
-        
+
+        // Script Navbar Mobile Fixé
+        document.getElementById('mobile-menu-btn').onclick = function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        };
+
+        // Fermer le menu mobile lors du clic sur un lien
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.onclick = () => document.getElementById('mobile-menu').classList.add('hidden');
+        });
+
         window.onload = loadPortfolio;
     </script>
 </body>
