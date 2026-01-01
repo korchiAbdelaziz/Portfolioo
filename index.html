@@ -71,7 +71,7 @@
         
         #pfe-banner { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
 
-        /* Fix pour les vidéos verticales (format téléphone) */
+        /* Fix pour les vidéos verticales */
         #modal-video {
             max-height: 70vh;
             width: auto;
@@ -145,9 +145,26 @@
         <div id="experiences-grid" class="space-y-8"></div>
     </section>
 
-    <section id="projects" class="py-32 px-6 max-w-7xl mx-auto">
-        <h2 class="text-5xl font-bold mb-16">Projets Réalisés</h2>
-        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    <section id="projects" class="py-32 px-6 max-w-7xl mx-auto text-center">
+        <h2 class="text-5xl font-bold mb-16 text-left">Projets Réalisés</h2>
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"></div>
+
+        <div class="glass p-10 rounded-3xl border border-blue-500/20 max-w-4xl mx-auto mt-20 text-center">
+            <h3 class="text-2xl font-bold mb-4">Envie d'en voir plus ? 🚀</h3>
+            <p class="text-zinc-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+                Cette sélection ne représente qu'une partie de mes travaux. Je partage régulièrement des démonstrations vidéos et le code source complet de mes expérimentations sur GitHub.
+            </p>
+            <div class="flex flex-wrap gap-6 justify-center">
+                <a id="github-cta-link" href="#" target="_blank" class="bg-white text-black hover:bg-blue-600 hover:text-white px-8 py-4 rounded-full font-bold flex items-center gap-3 transition-all transform hover:scale-105 shadow-xl">
+                    <i class="fab fa-github text-xl"></i>
+                    <span>Voir tout mon GitHub</span>
+                </a>
+                <a id="youtube-cta-link" href="#" target="_blank" class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full font-bold flex items-center gap-3 transition-all transform hover:scale-105 shadow-xl">
+                    <i class="fab fa-youtube text-xl"></i>
+                    <span>Plus de démos vidéos</span>
+                </a>
+            </div>
+        </div>
     </section>
 
     <section id="certs" class="py-32 bg-zinc-950/50 px-6">
@@ -180,15 +197,15 @@
                 </div>
             </div>
             <div class="flex justify-center gap-8 text-3xl">
-                <a id="link-linkedin" href="#" target="_blank" class="text-zinc-500 hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
-                <a id="link-github" href="#" target="_blank" class="text-zinc-500 hover:text-white"><i class="fab fa-github"></i></a>
-                <a id="link-Youtube" href="#" target="_blank" class="text-zinc-500 hover:text-red-500"><i class="fab fa-youtube"></i></a>
+                <a id="link-linkedin-foot" href="#" target="_blank" class="text-zinc-500 hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+                <a id="link-github-foot" href="#" target="_blank" class="text-zinc-500 hover:text-white"><i class="fab fa-github"></i></a>
+                <a id="link-Youtube-foot" href="#" target="_blank" class="text-zinc-500 hover:text-red-500"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
     </footer>
 
     <div id="video-modal" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4 bg-black/95">
-        <button onclick="closeModal()" class="absolute top-8 right-8 text-white/50 text-5xl hover:text-white transition-colors z-[1100]"><i class="fas fa-times"></i></button>
+        <button onclick="closeModal()" class="absolute top-8 right-8 text-white/50 text-5xl hover:text-white transition-colors"><i class="fas fa-times"></i></button>
         <div class="relative max-w-5xl w-full flex flex-col items-center gap-6" id="modal-content">
             <div class="w-full bg-black rounded-2xl overflow-hidden shadow-2xl">
                 <video id="modal-video" controls class="rounded-2xl"></video>
@@ -237,9 +254,13 @@
                 document.getElementById('user-description').innerText = p.description;
                 document.getElementById('footer-email').innerText = p.email;
                 document.getElementById('cert-count').innerText = certificationsData.length;
-                document.getElementById('link-linkedin').href = p.social.linkedin;
-                document.getElementById('link-github').href = p.social.github;
-                document.getElementById('link-Youtube').href = p.social.youtube;
+                
+                // Links update (including the new CTA buttons)
+                document.getElementById('link-linkedin-foot').href = p.social.linkedin;
+                document.getElementById('link-github-foot').href = p.social.github;
+                document.getElementById('link-Youtube-foot').href = p.social.youtube;
+                document.getElementById('github-cta-link').href = p.social.github;
+                document.getElementById('youtube-cta-link').href = p.social.youtube;
 
                 projectData = projs.projects;
                 
@@ -283,7 +304,7 @@
                             <div class="bg-white text-black w-14 h-14 rounded-full flex items-center justify-center shadow-xl"><i class="fas fa-play ml-1"></i></div>
                         </div>
                     </div>
-                    <div class="p-6">
+                    <div class="p-6 text-left">
                         <h3 class="text-xl font-bold mb-2 text-white line-clamp-1">${p.title}</h3>
                         <p class="text-zinc-400 text-sm line-clamp-2">${p.description}</p>
                     </div>
@@ -306,8 +327,8 @@
                         <div class="h-64 mb-4 rounded-xl overflow-hidden bg-white">
                             <iframe src="${cleanPath}#toolbar=0" class="w-full h-full border-none"></iframe>
                         </div>
-                        <p class="text-blue-400 text-[10px] uppercase tracking-widest font-bold">${c.org}</p>
-                        <h4 class="font-bold text-white text-sm line-clamp-2 mt-1">${c.title}</h4>
+                        <p class="text-blue-400 text-[10px] uppercase tracking-widest font-bold text-left">${c.org}</p>
+                        <h4 class="font-bold text-white text-sm line-clamp-2 mt-1 text-left">${c.title}</h4>
                     </div>
                 `;
             }).join('');
