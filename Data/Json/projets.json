@@ -42,6 +42,22 @@
                 "CNN",
                 "Keras "
             ]
+        },
+        {
+            "id": 4,
+            "title": "Telegram RAG Chatbot",
+            "description": "Chatbot intelligent sur Telegram basé sur le Retrieval-Augmented Generation (RAG) pour répondre aux questions à partir de documents locaux et bases de connaissances.",
+            "media": "Data/projects/Telegram.mp4",
+            "thumbnail": "Data/projects/thumb_telegram.jpg",
+            "source_link": "https://github.com/korchiAbdelaziz/Telegram_RAG_Chatbot",
+            "skills": [
+                "Python",
+                "RAG",
+                "Telegram Bot API",
+                "Vector DB",
+                "LLM"
+            ]
         }
+        
     ]
 }
