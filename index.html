@@ -11,6 +11,58 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+
+.org-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: yellow;
+    color: black;
+    padding: 4px 12px;
+    border-radius: 99px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 20;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.cert-img-container {
+    position: relative;
+    height: 16rem; /* h-64 */
+    width: 100%;
+    background: #111;
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.cert-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.cert-card-container:hover img {
+    transform: scale(1.1);
+}
+        /* Style pour les miniatures de certificats */
+.cert-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cert-thumbnail i {
+    font-size: 3rem;
+    color: #2563eb;
+}
+
+
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -313,32 +365,52 @@
         }
 
         function renderCertificates(page) {
-            currentCertPage = page;
-            const grid = document.getElementById('certs-grid');
-            const totalPages = Math.ceil(certificationsData.length / certsPerPage);
-            const start = (page - 1) * certsPerPage;
-            const pageData = certificationsData.slice(start, start + certsPerPage);
+    currentCertPage = page;
+    const grid = document.getElementById('certs-grid');
+    const totalPages = Math.ceil(certificationsData.length / certsPerPage);
+    const start = (page - 1) * certsPerPage;
+    const pageData = certificationsData.slice(start, start + certsPerPage);
 
-            grid.innerHTML = pageData.map(c => {
-                const cleanPath = c.image.startsWith('Data/') ? c.image : `Data/certif/${c.image}`;
-                return `
-                    <div class="cert-card-container glass p-6 rounded-2xl border border-white/10 hover:border-blue-500 transition-all group">
-                        <div class="cert-overlay" onclick="openCertModal('${cleanPath}')"></div>
-                        <div class="h-64 mb-4 rounded-xl overflow-hidden bg-white">
-                            <iframe src="${cleanPath}#toolbar=0" class="w-full h-full border-none"></iframe>
-                        </div>
-                        <p class="text-blue-400 text-[10px] uppercase tracking-widest font-bold text-left">${c.org}</p>
-                        <h4 class="font-bold text-white text-sm line-clamp-2 mt-1 text-left">${c.title}</h4>
+    grid.innerHTML = pageData.map(c => {
+        // Chemin vers votre image miniature personnalisée
+        const fakeThumbnail = "Data/Images/Certif_Fake_Minature.png";
+        // Chemin propre vers le PDF pour le modal
+        const pdfPath = c.image.startsWith('Data/') ? c.image : `Data/certif/${c.image}`;
+
+        return `
+            <div class="cert-card-container glass p-4 rounded-2xl border border-white/10 hover:border-blue-500 transition-all group relative flex flex-col h-full">
+                <div class="org-badge">${c.org}</div>
+                
+                <div class="cert-overlay" onclick="openCertModal('${pdfPath}')"></div>
+                
+                <div class="cert-img-container mb-4">
+                    <img src="${fakeThumbnail}" alt="Certificat Miniature">
+                    <div class="absolute inset-0 bg-blue-900/20 group-hover:bg-transparent transition-colors"></div>
+                </div>
+                
+                <div class="mt-auto">
+                    <h4 class="font-bold text-white text-sm line-clamp-2 leading-snug">${c.title}</h4>
+                    <div class="flex items-center gap-2 mt-3 text-blue-400 text-[10px] font-bold uppercase tracking-tighter">
+                        <i class="fas fa-search-plus"></i>
+                        <span>Cliquer pour agrandir</span>
                     </div>
-                `;
-            }).join('');
+                </div>
+            </div>
+        `;
+    }).join('');
 
-            document.getElementById('certs-pagination').innerHTML = `
-                <button onclick="renderCertificates(${page - 1})" ${page === 1 ? 'disabled' : ''} class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
-                <span class="font-bold text-blue-400">Page ${page} / ${totalPages}</span>
-                <button onclick="renderCertificates(${page + 1})" ${page === totalPages ? 'disabled' : ''} class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
-            `;
-        }
+    // Mise à jour de la pagination
+    const pagination = document.getElementById('certs-pagination');
+    pagination.innerHTML = `
+        <button onclick="renderCertificates(${page - 1})" ${page === 1 ? 'disabled' : ''} class="pagination-btn">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <span class="font-bold text-blue-400">Page ${page} / ${totalPages}</span>
+        <button onclick="renderCertificates(${page + 1})" ${page === totalPages ? 'disabled' : ''} class="pagination-btn">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    `;
+}
 
         function openProject(id) {
             const p = projectData.find(proj => proj.id == id);
