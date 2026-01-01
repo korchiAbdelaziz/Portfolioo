@@ -70,6 +70,15 @@
         .cert-overlay { position: absolute; inset: 0; z-index: 10; cursor: pointer; }
         
         #pfe-banner { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
+
+        /* Fix pour les vidéos verticales (format téléphone) */
+        #modal-video {
+            max-height: 70vh;
+            width: auto;
+            margin: 0 auto;
+            display: block;
+            background: #000;
+        }
     </style>
 </head>
 
@@ -179,13 +188,17 @@
     </footer>
 
     <div id="video-modal" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4 bg-black/95">
-        <button onclick="closeModal()" class="absolute top-8 right-8 text-white/50 text-5xl"><i class="fas fa-times"></i></button>
-        <div class="relative max-w-5xl w-full flex flex-col gap-6" id="modal-content">
-            <video id="modal-video" controls class="w-full rounded-2xl"></video>
-            <div>
+        <button onclick="closeModal()" class="absolute top-8 right-8 text-white/50 text-5xl hover:text-white transition-colors z-[1100]"><i class="fas fa-times"></i></button>
+        <div class="relative max-w-5xl w-full flex flex-col items-center gap-6" id="modal-content">
+            <div class="w-full bg-black rounded-2xl overflow-hidden shadow-2xl">
+                <video id="modal-video" controls class="rounded-2xl"></video>
+            </div>
+            <div class="w-full text-center">
                 <h3 id="modal-title" class="text-3xl font-bold"></h3>
                 <p id="modal-desc" class="text-zinc-400 mt-2"></p>
-                <a id="modal-source" href="#" target="_blank" class="inline-block mt-4 bg-white text-black px-6 py-2 rounded-full font-bold">Code Source</a>
+                <a id="modal-source" href="#" target="_blank" class="inline-flex items-center gap-2 mt-4 bg-white text-black px-6 py-2 rounded-full font-bold hover:bg-blue-600 hover:text-white transition-all">
+                    <i class="fab fa-github"></i> Code Source
+                </a>
             </div>
         </div>
     </div>
@@ -245,24 +258,21 @@
         }
 
         function loadExperiences(exps) {
-    document.getElementById('experiences-grid').innerHTML = exps.map(exp => `
-        <div class="glass rounded-3xl p-8 border border-white/10 hover:border-blue-500/50 transition-all">
-            <div class="flex flex-col md:flex-row gap-6">
-                <div class="w-24 h-24 bg-white rounded-2xl p-4 flex items-center justify-center shrink-0">
-                    <img src="${exp.logo}" class="max-h-full object-contain">
+            document.getElementById('experiences-grid').innerHTML = exps.map(exp => `
+                <div class="glass rounded-3xl p-8 border border-white/10 hover:border-blue-500/50 transition-all">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="w-24 h-24 bg-white rounded-2xl p-4 flex items-center justify-center shrink-0">
+                            <img src="${exp.logo}" class="max-h-full object-contain">
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">${exp.role}</h3>
+                            <p class="text-blue-400 font-bold">${exp.company} | ${exp.date}</p>
+                            <p class="text-zinc-300 mt-4">${exp.desc}</p>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="text-2xl font-bold">${exp.role}</h3>
-                    <p class="text-blue-400 font-bold">${exp.company} | ${exp.date}</p>
-                    <p class="text-zinc-300 mt-4">${exp.desc}</p>
-                    <ul class="mt-4 list-disc list-inside text-zinc-400 space-y-1">
-                        ${exp.highlights.map(h => `<li>${h}</li>`).join('')}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    `).join('');
-}
+            `).join('');
+        }
 
         function loadProjects() {
             document.getElementById('projects-grid').innerHTML = projectData.map(p => `
@@ -289,7 +299,6 @@
             const pageData = certificationsData.slice(start, start + certsPerPage);
 
             grid.innerHTML = pageData.map(c => {
-                // CORRECTION DU CHEMIN DUPLIQUE
                 const cleanPath = c.image.startsWith('Data/') ? c.image : `Data/certif/${c.image}`;
                 return `
                     <div class="cert-card-container glass p-6 rounded-2xl border border-white/10 hover:border-blue-500 transition-all group">
