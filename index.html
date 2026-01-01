@@ -245,21 +245,24 @@
         }
 
         function loadExperiences(exps) {
-            document.getElementById('experiences-grid').innerHTML = exps.map(exp => `
-                <div class="glass rounded-3xl p-8 border border-white/10 hover:border-blue-500/50 transition-all">
-                    <div class="flex flex-col md:flex-row gap-6">
-                        <div class="w-24 h-24 bg-white rounded-2xl p-4 flex items-center justify-center shrink-0">
-                            <img src="${exp.logo}" class="max-h-full object-contain">
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold">${exp.role}</h3>
-                            <p class="text-blue-400 font-bold">${exp.company} | ${exp.date}</p>
-                            <p class="text-zinc-300 mt-4">${exp.desc}</p>
-                        </div>
-                    </div>
+    document.getElementById('experiences-grid').innerHTML = exps.map(exp => `
+        <div class="glass rounded-3xl p-8 border border-white/10 hover:border-blue-500/50 transition-all">
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="w-24 h-24 bg-white rounded-2xl p-4 flex items-center justify-center shrink-0">
+                    <img src="${exp.logo}" class="max-h-full object-contain">
                 </div>
-            `).join('');
-        }
+                <div>
+                    <h3 class="text-2xl font-bold">${exp.role}</h3>
+                    <p class="text-blue-400 font-bold">${exp.company} | ${exp.date}</p>
+                    <p class="text-zinc-300 mt-4">${exp.desc}</p>
+                    <ul class="mt-4 list-disc list-inside text-zinc-400 space-y-1">
+                        ${exp.highlights.map(h => `<li>${h}</li>`).join('')}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
 
         function loadProjects() {
             document.getElementById('projects-grid').innerHTML = projectData.map(p => `
