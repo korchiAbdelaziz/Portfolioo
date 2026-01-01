@@ -13,11 +13,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
             --blue-primary: #2563eb;
@@ -35,47 +31,19 @@
         
         /* Navbar */
         .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(20px);
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
         }
         
-        .navbar.scrolled {
-            background: rgba(5, 5, 5, 0.95);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .nav-link {
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
+        .nav-link { position: relative; transition: all 0.3s ease; }
         .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--blue-primary);
-            transition: width 0.3s ease;
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: var(--blue-primary); transition: width 0.3s ease;
         }
-        
-        .nav-link.active::after {
-            width: 100%;
-        }
-        
-        .nav-link:hover {
-            color: var(--blue-primary);
-            transform: translateY(-2px);
-        }
-        
+        .nav-link.active::after { width: 100%; }
+
         /* Glass effect */
         .glass {
             background: rgba(255, 255, 255, 0.03);
@@ -83,211 +51,34 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .glass-hover {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .glass-hover:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(37, 99, 235, 0.3);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
-        }
-        
-        /* 3D Tilt Effect */
-        .tilt-card {
-            transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
-        }
-        
-        /* Hero Gradient */
-        .hero-gradient {
-            background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 60%);
-        }
-        
-        /* Profile Float Animation */
+        .profile-float { animation: float 6s ease-in-out infinite; }
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(2deg); }
         }
 
-        .profile-float {
-            animation: float 6s ease-in-out infinite;
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0a0a0a; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--blue-primary); border-radius: 10px; }
+        
+        .pagination-btn {
+            @apply px-4 py-2 bg-white/5 border border-white/10 rounded-lg hover:bg-blue-600 transition-all disabled:opacity-20 disabled:cursor-not-allowed;
         }
 
-        /* Custom Scrollbar */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 8px;
-        }
+        /* Correction Iframe & Click */
+        .cert-card-container { position: relative; }
+        .cert-overlay { position: absolute; inset: 0; z-index: 10; cursor: pointer; }
         
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #0a0a0a;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: var(--blue-primary);
-            border-radius: 10px;
-        }
-        
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: var(--blue-hover);
-        }
-        
-        /* Click Feedback */
-        .click-feedback {
-            transition: transform 0.1s ease, box-shadow 0.3s ease;
-        }
-        
-        .click-feedback:active {
-            transform: scale(0.95);
-        }
-        
-        /* Glow Effect */
-        .glow-on-hover {
-            transition: all 0.3s ease;
-        }
-        
-        .glow-on-hover:hover {
-            box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
-        }
-        
-        /* Section Animations */
-        .section-hidden {
-            opacity: 0;
-            transform: translateY(50px);
-        }
-        
-        /* S'assurer que les sections sont visibles par défaut */
-        section, footer {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-        
-        /* Optimisations de performance */
-        * {
-            will-change: auto;
-        }
-        
-        .tilt-card, .glass-hover {
-            will-change: transform;
-        }
-        
-        img, iframe {
-            content-visibility: auto;
-        }
-        
-        /* Bannière PFE - Très Visible */
-        #pfe-banner {
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-        }
-        
-        #pfe-banner p {
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Badge PFE dans Hero */
-        #pfe-badge {
-            transform: scale(0.8);
-        }
-        
-        /* Certifications - Meilleure lisibilité */
-        #certs-grid iframe {
-            background: white !important;
-        }
-        
-        #certs-grid .glass {
-            background: rgba(255, 255, 255, 0.05);
-        }
-        
-        /* Animation simple de couleur pour expériences */
-        #experiences-grid .glass {
-            transition: all 0.3s ease;
-        }
-        
-        #experiences-grid .glass:hover {
-            background: rgba(37, 99, 235, 0.1);
-            border-color: rgba(37, 99, 235, 0.5);
-            transform: translateY(-2px);
-        }
-        
-        /* Amélioration affichage vidéos et certifications */
-        #projects-grid .glass,
-        #certs-grid .glass {
-            will-change: auto;
-        }
-        
-        /* Styles pour copie facile */
-        .copyable {
-            cursor: pointer;
-            position: relative;
-            transition: all 0.2s ease;
-        }
-        
-        .copyable:hover {
-            color: #60a5fa;
-        }
-        
-        .copyable::after {
-            content: '📋';
-            margin-left: 8px;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-        
-        .copyable:hover::after {
-            opacity: 1;
-        }
-        
-        /* Mobile Optimizations */
-        @media (max-width: 768px) {
-            .tilt-card {
-                transform: none !important;
-            }
-            
-            .profile-float {
-                animation-duration: 8s;
-            }
-        }
-        
-        /* Modal Backdrop */
-        .modal-backdrop {
-            backdrop-filter: blur(10px);
-        }
-        
-        /* PDF Frame */
-        .pdf-frame {
-            pointer-events: none;
-        }
-        
-        .pdf-frame:hover {
-            pointer-events: auto;
-        }
+        #pfe-banner { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
     </style>
 </head>
 
 <body class="custom-scrollbar">
     
-    <!-- Navbar Intelligente -->
     <nav id="navbar" class="navbar">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="text-xl font-bold text-blue-400">AK</div>
-                <div class="hidden md:flex items-center gap-8">
-                    <a href="#hero" class="nav-link active" data-section="hero">Accueil</a>
-                    <a href="#about" class="nav-link" data-section="about">À Propos</a>
-                    <a href="#experiences" class="nav-link" data-section="experiences">Expériences</a>
-                    <a href="#projects" class="nav-link" data-section="projects">Projets</a>
-                    <a href="#certs" class="nav-link" data-section="certs">Certifications</a>
-                    <a href="#contact" class="nav-link" data-section="contact">Contact</a>
-                </div>
-                <button id="mobile-menu-btn" class="md:hidden text-white">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <div class="flex flex-col gap-4">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="text-xl font-bold text-blue-400">AK</div>
+            <div class="hidden md:flex items-center gap-8">
                 <a href="#hero" class="nav-link active" data-section="hero">Accueil</a>
                 <a href="#about" class="nav-link" data-section="about">À Propos</a>
                 <a href="#experiences" class="nav-link" data-section="experiences">Expériences</a>
@@ -295,959 +86,268 @@
                 <a href="#certs" class="nav-link" data-section="certs">Certifications</a>
                 <a href="#contact" class="nav-link" data-section="contact">Contact</a>
             </div>
-                </div>
+            <div class="flex items-center gap-4">
+                <a href="Data/Korchi_Abdelaziz_CV.pdf" download class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 transition-all shadow-lg">
+                    <i class="fas fa-download"></i> <span class="hidden sm:inline">Mon CV</span>
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden text-white text-xl"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
     </nav>
 
-    <!-- Bannière PFE - Très Visible et Lisible -->
-    <div id="pfe-banner" class="fixed top-16 left-0 right-0 z-[200] bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 text-white py-4 px-6 shadow-2xl transform -translate-y-full transition-transform duration-500 border-b-4 border-yellow-400">
+    <div id="pfe-banner" class="fixed top-16 left-0 right-0 z-[200] bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 text-white py-4 px-6 transform -translate-y-full transition-transform duration-500 border-b-4 border-yellow-400">
         <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-4">
-            <div class="flex items-center gap-4 flex-1 min-w-[300px]">
-                <div class="bg-white/30 rounded-full p-3 animate-pulse shadow-lg">
-                    <i class="fas fa-briefcase text-2xl"></i>
-            </div>
-                <div>
-                    <p class="font-extrabold text-lg md:text-xl mb-1 flex items-center gap-2">
-                        <span class="text-yellow-300 animate-bounce">🔍</span>
-                        <span>RECHERCHE STAGE PFE</span>
-                    </p>
-                    <p class="text-sm md:text-base font-semibold opacity-95">4 à 6 mois | Février 2026 | Ingénieur IA & Full-Stack</p>
-                </div>
-                </div>
             <div class="flex items-center gap-4">
-                <a href="#contact" class="bg-white text-blue-600 hover:bg-yellow-300 hover:text-blue-900 px-8 py-3 rounded-full font-bold text-base transition-all click-feedback shadow-lg transform hover:scale-105">
-                    <i class="fas fa-envelope mr-2"></i>Me Contacter
-                </a>
-                <button onclick="closePfeBanner()" class="text-white/90 hover:text-white hover:bg-white/20 rounded-full p-2 transition-all">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
+                <div class="bg-white/30 rounded-full p-3 animate-pulse"><i class="fas fa-briefcase text-2xl"></i></div>
+                <div>
+                    <p class="font-extrabold text-lg md:text-xl">🔍 RECHERCHE STAGE PFE</p>
+                    <p class="text-sm opacity-95">4 à 6 mois | Février 2026 | Ingénieur IA & Full-Stack</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="#contact" class="bg-white text-blue-600 px-6 py-2 rounded-full font-bold">Me Contacter</a>
+                <button onclick="closePfeBanner()"><i class="fas fa-times text-xl"></i></button>
             </div>
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <header id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden hero-gradient px-6 pt-32 md:pt-40">
-        <div class="z-10 flex flex-col items-center text-center">
-            <div class="relative mb-10 profile-float">
-                <div class="absolute inset-0 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-                <img id="profile-img" src="" alt="Abdelaziz Korchi"
-                    class="relative w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-4 border-white/10 p-2 bg-zinc-900 glow-on-hover">
+    <header id="hero" class="relative min-h-screen flex items-center justify-center pt-32 px-6 text-center">
+        <div class="z-10">
+            <div class="profile-float mb-10 inline-block relative">
+                <img id="profile-img" src="" class="w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-white/10 p-2 bg-zinc-900 object-cover shadow-2xl">
             </div>
-
-            <h1 id="user-name" class="text-6xl md:text-9xl font-extrabold tracking-tighter mb-4 opacity-0"></h1>
-            <p id="user-title" class="text-blue-500 text-lg md:text-2xl font-medium tracking-[0.3em] uppercase opacity-0 mb-4"></p>
-            
-            <!-- Badge PFE dans le Hero -->
-            <div class="mb-6 opacity-0" id="pfe-badge">
-                <span class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-bold text-sm md:text-base shadow-xl animate-pulse">
-                    <i class="fas fa-search"></i>
-                    <span>Recherche Stage PFE | Février 2026</span>
+            <h1 id="user-name" class="text-6xl md:text-9xl font-extrabold mb-4 opacity-0 translate-y-10"></h1>
+            <p id="user-title" class="text-blue-500 text-lg md:text-2xl font-medium tracking-widest uppercase mb-4 opacity-0 translate-y-10"></p>
+            <div class="mb-6 opacity-0 scale-75" id="pfe-badge">
+                <span class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-2 rounded-full font-bold text-sm animate-pulse">
+                    <i class="fas fa-search"></i> Stage PFE | Février 2026
                 </span>
             </div>
-            
-            <p id="user-description" class="text-zinc-300 text-base md:text-lg max-w-3xl leading-relaxed opacity-0 mb-8"></p>
-
-            <div id="hero-actions" class="mt-12 flex flex-wrap gap-6 justify-center opacity-0">
-                <a href="#projects" class="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-full font-bold transition-all click-feedback glow-on-hover">
-                    <i class="fas fa-rocket mr-2"></i>Mes Projets
-                </a>
-                <a href="#contact" class="glass px-10 py-4 rounded-full font-bold hover:bg-white/5 transition-all click-feedback">
-                    <i class="fas fa-envelope mr-2"></i>Me Contacter
-                </a>
+            <p id="user-description" class="text-zinc-300 max-w-3xl mx-auto mb-8 opacity-0"></p>
+            <div id="hero-actions" class="flex flex-wrap gap-6 justify-center opacity-0 translate-y-10">
+                <a href="#projects" class="bg-blue-600 px-10 py-4 rounded-full font-bold">Mes Projets</a>
+                <a href="#contact" class="glass px-10 py-4 rounded-full font-bold">Me Contacter</a>
             </div>
         </div>
-
-        <!-- Parallax Background -->
-        <div class="absolute top-1/4 -left-20 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] parallax-bg" data-depth="0.2"></div>
-        <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px] parallax-bg" data-depth="0.4"></div>
     </header>
 
-    <!-- Expériences Professionnelles Section -->
     <section id="experiences" class="py-32 px-6 max-w-7xl mx-auto">
-        <div class="flex items-end justify-between mb-16">
-            <div>
-                <span class="text-blue-500 font-bold tracking-widest uppercase text-sm">Parcours</span>
-                <h2 class="text-5xl font-bold mt-2">Expériences Professionnelles</h2>
-            </div>
-            <div class="hidden md:block h-px flex-grow mx-10 bg-white/10"></div>
-        </div>
-
-        <div id="experiences-grid" class="space-y-8">
-            <!-- Les expériences seront chargées ici -->
-        </div>
+        <h2 class="text-5xl font-bold mb-16">Expériences Professionnelles</h2>
+        <div id="experiences-grid" class="space-y-8"></div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects" class="py-32 px-6 max-w-7xl mx-auto">
-        <div class="flex items-end justify-between mb-16">
-            <div>
-                <span class="text-blue-500 font-bold tracking-widest uppercase text-sm">Portfolio</span>
-                <h2 class="text-5xl font-bold mt-2">Projets Réalisés</h2>
-            </div>
-            
-            <div class="hidden md:block h-px flex-grow mx-10 bg-white/10"></div>
-        </div>
-
-        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-        </div>
+        <h2 class="text-5xl font-bold mb-16">Projets Réalisés</h2>
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
     </section>
 
-    <!-- Section À Propos / Qui Je Suis -->
-    <section id="about" class="py-24 px-6 bg-gradient-to-b from-zinc-950 to-zinc-900 border-y border-white/5">
-        <div class="max-w-5xl mx-auto text-center">
-            <span class="text-blue-500 font-bold tracking-widest uppercase text-sm">À Propos</span>
-            <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-8">Qui Je Suis</h2>
-            <div class="glass rounded-3xl p-8 md:p-12 text-left">
-                <div class="flex items-start gap-6 mb-6">
-                    <div class="bg-blue-600/20 rounded-full p-4">
-                        <i class="fas fa-graduation-cap text-blue-400 text-3xl"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="text-2xl font-bold mb-3 text-white">Formation</h3>
-                        <p class="text-zinc-300 leading-relaxed text-lg">
-                            Étudiant en cycle d'Ingénieur Informatique & Réseaux à l'EMSI, en parallèle d'un Master MBDS à l'Université Côte d'Azur (France). Spécialisé en développement full-stack, data engineering et intelligence artificielle.
-                        </p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-6 mb-6">
-                    <div class="bg-purple-600/20 rounded-full p-4">
-                        <i class="fas fa-code text-purple-400 text-3xl"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="text-2xl font-bold mb-3 text-white">Expertise</h3>
-                        <p class="text-zinc-300 leading-relaxed text-lg">
-                            Passionné par la conception de solutions performantes et orientées utilisateur. Expérience en Python, React, Data Engineering, Machine Learning, et développement d'agents intelligents avec LLM local.
-                        </p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-6">
-                    <div class="bg-yellow-500/20 rounded-full p-4">
-                        <i class="fas fa-briefcase text-yellow-400 text-3xl"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="text-2xl font-bold mb-3 text-white">Recherche Stage PFE</h3>
-                        <p class="text-zinc-300 leading-relaxed text-lg mb-4">
-                            <strong class="text-blue-400">Actuellement à la recherche d'un stage PFE de 4 à 6 mois à partir de Février 2026.</strong> 
-                            Je souhaite mettre mes compétences en pratique et contribuer à des projets innovants dans le domaine de l'IA, du développement web ou de la data engineering.
-                        </p>
-                        <a href="#contact" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold transition-all click-feedback glow-on-hover">
-                            <i class="fas fa-envelope"></i>
-                            <span>Me Contacter pour un Stage</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certifications Section -->
-    <section id="certs" class="py-32 bg-zinc-950/50 border-y border-white/5 px-6">
+    <section id="certs" class="py-32 bg-zinc-950/50 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <span class="text-blue-500 font-bold tracking-widest uppercase text-sm">Compétences</span>
-                <h2 class="text-4xl font-bold mt-2">Certifications & Diplômes</h2>
-                <p class="text-zinc-400 mt-4 max-w-2xl mx-auto">Cliquez sur une certification pour l'agrandir et la voir en détail</p>
+                <h2 class="text-4xl font-bold mb-4">Certifications & Diplômes</h2>
+                <div class="inline-block bg-blue-600/20 border border-blue-500/50 text-blue-400 px-6 py-2 rounded-full font-bold text-sm mb-4">
+                    <i class="fas fa-certificate mr-2"></i> <span id="cert-count">0</span> Certifications obtenues
+                </div>
+                <p class="text-zinc-400">Affichage de 6 par page</p>
             </div>
-            <div id="certs-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
-            </div>
+            <div id="certs-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            <div id="certs-pagination" class="flex justify-center items-center gap-4 mt-12"></div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <footer id="contact" class="py-20 text-center border-t border-white/5">
-        <div class="max-w-4xl mx-auto px-6">
-            <h3 class="text-3xl font-bold mb-4">On travaille ensemble ?</h3>
-            <p id="footer-email" class="text-blue-400 text-xl mb-8"></p>
-            <div class="flex justify-center gap-8 text-3xl text-zinc-500">
-                <a id="link-linkedin" href="#" target="_blank" class="hover:text-blue-400 transition-all click-feedback">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a id="link-github" href="#" target="_blank" class="hover:text-blue-400 transition-all click-feedback">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a id="link-Youtube" href="#" target="_blank" class="hover:text-blue-400 transition-all click-feedback">
-                    <i class="fab fa-youtube"></i>
-                </a>
-        </div>
+    <footer id="contact" class="py-20 bg-zinc-950 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h3 class="text-3xl font-bold mb-12">On travaille ensemble ?</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 text-left">
+                <div onclick="copyToClipboard(document.getElementById('footer-email').innerText, 'Email')" class="glass p-6 rounded-2xl cursor-pointer hover:border-blue-500 transition-all group">
+                    <i class="fas fa-envelope text-blue-400 text-2xl mb-3"></i>
+                    <p class="text-zinc-500 text-sm">Email (cliquer pour copier)</p>
+                    <p id="footer-email" class="font-bold text-lg group-hover:text-blue-400 transition-colors"></p>
+                </div>
+                <div onclick="copyToClipboard('+212 654 353 381', 'Téléphone')" class="glass p-6 rounded-2xl cursor-pointer hover:border-green-500 transition-all group">
+                    <i class="fas fa-phone text-green-400 text-2xl mb-3"></i>
+                    <p class="text-zinc-500 text-sm">Téléphone / WhatsApp</p>
+                    <p class="font-bold text-lg group-hover:text-green-400 transition-colors">+212 654 353 381</p>
+                </div>
+            </div>
+            <div class="flex justify-center gap-8 text-3xl">
+                <a id="link-linkedin" href="#" target="_blank" class="text-zinc-500 hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+                <a id="link-github" href="#" target="_blank" class="text-zinc-500 hover:text-white"><i class="fab fa-github"></i></a>
+                <a id="link-Youtube" href="#" target="_blank" class="text-zinc-500 hover:text-red-500"><i class="fab fa-youtube"></i></a>
+            </div>
         </div>
     </footer>
 
-    <!-- Modal Projet -->
-    <div id="video-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 modal-backdrop">
-        <div class="absolute inset-0 bg-black/95" onclick="closeModal()"></div>
-        <button onclick="closeModal()" class="absolute top-8 right-8 text-white/50 hover:text-white text-5xl transition-all z-[110] click-feedback">
-            <i class="fas fa-times"></i>
-        </button>
-        <div class="relative max-w-5xl w-full flex flex-col gap-6 z-[105]" id="modal-content">
-            <div class="relative group">
-                <div class="absolute -inset-1 bg-blue-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition"></div>
-                <video id="modal-video" controls class="relative w-full rounded-2xl border border-white/10 shadow-2xl"></video>
-            </div>
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 px-2">
-                <div>
-                    <h3 id="modal-title" class="text-3xl font-bold text-white tracking-tight"></h3>
-                    <p id="modal-desc" class="text-zinc-400 mt-2 max-w-2xl"></p>
-                </div>
-                <a id="modal-source" href="#" target="_blank" class="bg-white text-black hover:bg-blue-600 hover:text-white px-8 py-4 rounded-full font-bold flex items-center gap-3 transition-all whitespace-nowrap click-feedback glow-on-hover">
-                    <i class="fab fa-github"></i> Code Source
-                </a>
+    <div id="video-modal" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4 bg-black/95">
+        <button onclick="closeModal()" class="absolute top-8 right-8 text-white/50 text-5xl"><i class="fas fa-times"></i></button>
+        <div class="relative max-w-5xl w-full flex flex-col gap-6" id="modal-content">
+            <video id="modal-video" controls class="w-full rounded-2xl"></video>
+            <div>
+                <h3 id="modal-title" class="text-3xl font-bold"></h3>
+                <p id="modal-desc" class="text-zinc-400 mt-2"></p>
+                <a id="modal-source" href="#" target="_blank" class="inline-block mt-4 bg-white text-black px-6 py-2 rounded-full font-bold">Code Source</a>
             </div>
         </div>
     </div>
 
-    <!-- Modal Certification -->
-    <div id="cert-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 modal-backdrop">
-        <div class="absolute inset-0 bg-black/95" onclick="closeCertModal()"></div>
-        <button onclick="closeCertModal()" class="absolute top-8 right-8 text-white/50 hover:text-white text-5xl transition-all z-[110] click-feedback">
-            <i class="fas fa-times"></i>
-        </button>
-        <div class="relative max-w-4xl w-full z-[105]" id="cert-modal-content">
-            <iframe id="cert-pdf" src="" class="w-full h-[80vh] rounded-2xl border border-white/10"></iframe>
-        </div>
+    <div id="cert-modal" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4 bg-black/95">
+        <button onclick="closeCertModal()" class="absolute top-8 right-8 text-white text-5xl"><i class="fas fa-times"></i></button>
+        <iframe id="cert-pdf" src="" class="w-full max-w-4xl h-[80vh] rounded-2xl bg-white"></iframe>
     </div>
 
     <script>
-        // GSAP Setup
         gsap.registerPlugin(ScrollTrigger);
-
-        // Data Storage
         let projectData = [];
         let certificationsData = [];
-        
-        // Mobile Menu Toggle
-        document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
-        
-        // Navbar Scroll Effect
-        let lastScroll = 0;
-        const navbar = document.getElementById('navbar');
-        
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-            
-            lastScroll = currentScroll;
-        });
-        
-        // Active Section Highlight
-        const sections = document.querySelectorAll('section[id], header[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-        
-        function updateActiveNav() {
-            let current = '';
-            const scrollY = window.pageYOffset;
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 150;
-                const sectionHeight = section.offsetHeight;
-                
-                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('data-section') === current) {
-                    link.classList.add('active');
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', updateActiveNav);
-        
-        // Smooth Scroll for Nav Links
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    
-                    // Close mobile menu
-                    document.getElementById('mobile-menu')?.classList.add('hidden');
-                }
-            });
-        });
-        
-        // 3D Tilt Effect
-        function initTiltEffect() {
-            const cards = document.querySelectorAll('.tilt-card');
-            
-            cards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    if (window.innerWidth <= 768) return;
-                    
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    const rotateX = (y - centerY) / 10;
-                    const rotateY = (centerX - x) / 10;
-                    
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-                });
-            });
-        }
-        
-        // Parallax Effect - Optimisé avec throttling
-        let parallaxTimeout;
-        document.addEventListener("mousemove", (e) => {
-            if (parallaxTimeout) return;
-            
-            parallaxTimeout = requestAnimationFrame(() => {
-                const parallaxElements = document.querySelectorAll(".parallax-bg");
-                const x = (window.innerWidth - e.pageX * 2) / 100;
-                const y = (window.innerHeight - e.pageY * 2) / 100;
-                
-                parallaxElements.forEach(el => {
-                    const depth = parseFloat(el.getAttribute("data-depth"));
-                    el.style.transform = `translate(${x * depth}px, ${y * depth}px)`;
-                });
-                
-                parallaxTimeout = null;
-            });
-        });
-        
-        // Load Portfolio Data
+        let currentCertPage = 1;
+        const certsPerPage = 6;
+
         async function loadPortfolio() {
             try {
-                // Charger les données avec gestion d'erreur améliorée
-                const profileRes = await fetch('Data/Json/profile.json');
-                if (!profileRes.ok) throw new Error(`Erreur profile.json: ${profileRes.status}`);
+                const [profileRes, projsRes, certsRes, expRes] = await Promise.all([
+                    fetch('Data/Json/profile.json'),
+                    fetch('Data/Json/projets.json'),
+                    fetch('Data/Json/certifs.json'),
+                    fetch('Data/Json/experiences.json')
+                ]);
+
                 const profile = await profileRes.json();
-                
-                const projsRes = await fetch('Data/Json/projets.json');
-                if (!projsRes.ok) throw new Error(`Erreur projets.json: ${projsRes.status}`);
                 const projs = await projsRes.json();
+                certificationsData = await certsRes.json();
+                const experiences = await expRes.json();
+
+                // Profile
+                const p = profile.profile;
+                document.getElementById('profile-img').src = p.photo;
+                document.getElementById('user-name').innerText = p.fullName;
+                document.getElementById('user-title').innerText = p.title;
+                document.getElementById('user-description').innerText = p.description;
+                document.getElementById('footer-email').innerText = p.email;
+                document.getElementById('cert-count').innerText = certificationsData.length;
+                document.getElementById('link-linkedin').href = p.social.linkedin;
+                document.getElementById('link-github').href = p.social.github;
+                document.getElementById('link-Youtube').href = p.social.youtube;
+
+                projectData = projs.projects;
                 
-                const certsRes = await fetch('Data/Json/certifs.json');
-                if (!certsRes.ok) throw new Error(`Erreur certifs.json: ${certsRes.status}`);
-                const certs = await certsRes.json();
-                
-                const experiencesRes = await fetch('Data/Json/experiences.json');
-                if (!experiencesRes.ok) throw new Error(`Erreur experiences.json: ${experiencesRes.status}`);
-                const experiences = await experiencesRes.json();
-                
-                // Corriger les chemins des projets
-                projectData = projs.projects.map(p => ({
-                    ...p,
-                    media: p.media.replace('Data/projects/', 'Data/Demo_projects/'),
-                    thumbnail: p.thumbnail.replace('Data/projects/', 'Data/Demo_projects/')
-                }));
-                
-                // S'assurer que les chemins des certifications sont corrects
-                certificationsData = certs.map(c => ({
-                    ...c,
-                    image: c.image.startsWith('Data/') ? c.image : `Data/certif/${c.image}`
-                }));
-                
-                // Profile Info
-                const profileData = profile.profile;
-                if (document.getElementById('profile-img')) {
-                    document.getElementById('profile-img').src = profileData.photo;
-                }
-                if (document.getElementById('user-name')) {
-                    document.getElementById('user-name').innerText = profileData.fullName;
-                }
-                if (document.getElementById('user-title')) {
-                    document.getElementById('user-title').innerText = profileData.title;
-                }
-                if (document.getElementById('user-description')) {
-                    // Mettre à jour la description avec février 2026
-                    let description = profileData.description || '';
-                    description = description.replace(/février[^.]*/gi, 'février 2026');
-                    if (!description.includes('2026')) {
-                        description = description.replace(/février/gi, 'février 2026');
-                    }
-                    document.getElementById('user-description').innerText = description;
-                }
-                if (document.getElementById('footer-email')) {
-                    document.getElementById('footer-email').innerText = profileData.email;
-                }
-                if (document.getElementById('footer-phone')) {
-                    document.getElementById('footer-phone').innerText = profileData.phone;
-                }
-                if (document.getElementById('whatsapp-link')) {
-                    const phoneNumber = profileData.phone.replace(/\s/g, '').replace('+', '');
-                    document.getElementById('whatsapp-link').href = `https://wa.me/${phoneNumber}`;
-                }
-                if (document.getElementById('link-linkedin')) {
-                    document.getElementById('link-linkedin').href = profileData.social.linkedin;
-                }
-                if (document.getElementById('link-github')) {
-                    document.getElementById('link-github').href = profileData.social.github;
-                }
-                if (document.getElementById('link-Youtube')) {
-                    document.getElementById('link-Youtube').href = profileData.social.youtube;
-                }
-                
-                
-                // Hero Animations
-                const tl = gsap.timeline();
-                tl.to("#user-name", { opacity: 1, y: 0, duration: 1, ease: "power3.out" })
-                  .to("#user-title", { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.5")
-                  .to("#pfe-badge", { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.7)" }, "-=0.3")
-                  .to("#user-description", { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.5")
-                  .to("#hero-actions", { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.5");
-                
-                console.log('Données chargées:', {
-                    profile: profileData.fullName,
-                    projects: projectData.length,
-                    certifications: certificationsData.length
-                });
-                
-                // S'assurer que les sections sont visibles
-                const projectsSection = document.getElementById('projects');
-                const certsSection = document.getElementById('certs');
-                const contactSection = document.getElementById('contact');
-                
-                if (projectsSection) {
-                    projectsSection.style.opacity = '1';
-                    projectsSection.style.transform = 'translateY(0)';
-                }
-                if (certsSection) {
-                    certsSection.style.opacity = '1';
-                    certsSection.style.transform = 'translateY(0)';
-                }
-                if (contactSection) {
-                    contactSection.style.opacity = '1';
-                    contactSection.style.transform = 'translateY(0)';
-                }
-                
-                // Charger les expériences, projets et certifications de manière asynchrone pour meilleure performance
-                requestAnimationFrame(() => {
-                    loadExperiences(experiences.experiences);
-                });
-                
-                requestAnimationFrame(() => {
-                    loadProjects();
-                });
-                
-                requestAnimationFrame(() => {
-                    loadCertifications();
-                });
-                
-                // Afficher la bannière PFE
+                // Animations
+                gsap.to("#user-name", { opacity: 1, y: 0, duration: 1 });
+                gsap.to("#user-title", { opacity: 1, y: 0, duration: 1, delay: 0.3 });
+                gsap.to("#pfe-badge", { opacity: 1, scale: 1, duration: 0.5, delay: 0.5 });
+                gsap.to("#user-description", { opacity: 1, duration: 1, delay: 0.7 });
+                gsap.to("#hero-actions", { opacity: 1, y: 0, duration: 1, delay: 0.9 });
+
+                loadExperiences(experiences.experiences);
+                loadProjects();
+                renderCertificates(1);
                 showPfeBanner();
-                
-                // Init animations after content loaded - Optimisé
-                requestAnimationFrame(() => {
-                    initScrollAnimations();
-                    initTiltEffect();
-                });
-                
-            } catch (err) {
-                console.error("Erreur chargement JSON:", err);
-                // Afficher un message d'erreur visible à l'utilisateur
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-6 py-4 rounded-lg z-50';
-                errorDiv.innerHTML = `<strong>Erreur de chargement:</strong> ${err.message}`;
-                document.body.appendChild(errorDiv);
-                setTimeout(() => errorDiv.remove(), 5000);
-            }
+            } catch (err) { console.error(err); }
         }
-        
-        // Fonction pour générer les détails des projets
-        function getProjectDetails(project) {
-            const detailsMap = {
-                "Chatbot Détection d'Anomalies": [
-                    "Implémentation d'un agent IA avec LLM local (Ollama) pour diagnostic automatique",
-                    "Analyse en temps réel des anomalies système avec traitement intelligent",
-                    "Interface intuitive pour visualisation et reporting des anomalies détectées"
-                ],
-                "Chatbot RAG Local Assistance": [
-                    "Système RAG (Retrieval-Augmented Generation) pour assistance documentaire",
-                    "Base de données vectorielle pour recherche sémantique dans documents",
-                    "Interface conversationnelle pour consultation intelligente de la documentation"
-                ],
-                "Scanner AI: Pneumonie": [
-                    "Modèle CNN/Keras entraîné pour détection de pathologies pulmonaires",
-                    "Interface Streamlit pour upload et analyse d'images radiologiques",
-                    "Prédiction précise avec visualisation des résultats et probabilités"
-                ]
-            };
-            return detailsMap[project.title] || [
-                project.description,
-                "Développement et implémentation des fonctionnalités principales",
-                "Tests et optimisation des performances"
-            ];
-        }
-        
-        // Load Projects
-        function loadProjects() {
-            console.log('loadProjects appelé, projectData:', projectData);
-                const pGrid = document.getElementById('projects-grid');
-            if (!pGrid) {
-                console.error('projects-grid element not found');
-                return;
-            }
-            
-            if (!projectData || projectData.length === 0) {
-                console.warn('Aucun projet à afficher, projectData:', projectData);
-                pGrid.innerHTML = '<p class="text-zinc-400 text-center col-span-full py-10">Aucun projet disponible</p>';
-                return;
-            }
-            
-            console.log(`Affichage de ${projectData.length} projets`);
-            pGrid.innerHTML = '';
-            
-            projectData.forEach((p, index) => {
-                console.log(`Création carte projet ${index + 1}:`, p.title);
-                const card = document.createElement('div');
-                card.className = 'glass rounded-3xl overflow-hidden group cursor-pointer border border-white/10 transition-all duration-500 flex flex-col h-full tilt-card click-feedback';
-                card.onclick = () => openProject(p.id);
-                
-                card.innerHTML = `
-                    <div class="relative h-80 overflow-hidden bg-zinc-900/50 rounded-t-3xl mb-4">
-                        <img loading="lazy" src="${p.thumbnail}" alt="${p.title}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-                                <div class="absolute inset-0 bg-blue-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
-                            <div class="bg-white text-black w-16 h-16 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
-                                <i class="fas fa-play ml-1 text-xl"></i>
-                                    </div>
-                                </div>
-                            </div>
-                    <div class="p-6 lg:p-8 flex-grow flex flex-col">
-                        <h3 class="text-xl lg:text-2xl font-bold mb-3 group-hover:text-blue-400 transition-colors text-white line-clamp-2">${p.title}</h3>
-                        <p class="text-zinc-400 text-sm mb-4 line-clamp-2 leading-relaxed">${p.description}</p>
-                        
-                        <!-- Détails du projet (3 tirets) -->
-                        <div class="mb-6 space-y-2 flex-grow">
-                            ${getProjectDetails(p).map(detail => `
-                                <div class="flex items-start gap-2 text-zinc-400">
-                                    <span class="text-blue-400 mt-0.5 text-xs">▸</span>
-                                    <span class="text-xs md:text-sm">${detail}</span>
-                                </div>
-                            `).join('')}
+
+        function loadExperiences(exps) {
+            document.getElementById('experiences-grid').innerHTML = exps.map(exp => `
+                <div class="glass rounded-3xl p-8 border border-white/10 hover:border-blue-500/50 transition-all">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="w-24 h-24 bg-white rounded-2xl p-4 flex items-center justify-center shrink-0">
+                            <img src="${exp.logo}" class="max-h-full object-contain">
                         </div>
-                        
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            ${p.skills.slice(0, 4).map(s => `<span class="text-[10px] font-bold bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg uppercase tracking-wider text-zinc-300 group-hover:border-blue-500/50 transition-colors">${s}</span>`).join('')}
+                        <div>
+                            <h3 class="text-2xl font-bold">${exp.role}</h3>
+                            <p class="text-blue-400 font-bold">${exp.company} | ${exp.date}</p>
+                            <p class="text-zinc-300 mt-4">${exp.desc}</p>
                         </div>
                     </div>
-                `;
-                
-                pGrid.appendChild(card);
-                
-                // Animation optimisée - seulement si visible
-                if (index < 6) { // Animer seulement les 6 premiers pour performance
-                    gsap.from(card, {
-                        opacity: 0,
-                        y: 30,
-                        duration: 0.4,
-                        delay: index * 0.05,
-                        ease: "power2.out"
-                    });
-                } else {
-                    card.style.opacity = '1';
-                }
-            });
-        }
-        
-        // Fonction pour générer les tâches des expériences
-        function getExperienceTasks(exp) {
-            const tasksMap = {
-                "Royal Air Maroc": [
-                    "Développement d'un système OCR pour extraction automatique des données",
-                    "Intégration des données extraites vers les pipelines ETL existants",
-                    "Optimisation des performances du système d'extraction"
-                ],
-                "Zen Networks": [
-                    "Développement d'un agent intelligent LLM local pour diagnostic d'anomalies",
-                    "Implémentation de génération automatique de requêtes SQL via NLP",
-                    "Intégration avec les systèmes de monitoring et d'analyse de données"
-                ],
-                "Wings Technologie": [
-                    "Développement frontend avec React.js pour interface utilisateur",
-                    "Création de backend avec Express.js et intégration Firebase",
-                    "Mise en place de fonctionnalités de personnalisation de cartes digitales"
-                ],
-                "Agri 4.0": [
-                    "Conception de l'architecture de l'application web de gestion",
-                    "Développement full-stack avec Laravel et React.js",
-                    "Implémentation de base de données NoSQL avec MongoDB"
-                ]
-            };
-            return tasksMap[exp.company] || [
-                exp.desc,
-                "Tâches techniques et développement",
-                "Collaboration avec l'équipe projet"
-            ];
-        }
-        
-        // Load Experiences Professionnelles
-        function loadExperiences(experiencesData) {
-            console.log('loadExperiences appelé, experiencesData:', experiencesData);
-            const expGrid = document.getElementById('experiences-grid');
-            if (!expGrid) {
-                console.error('experiences-grid element not found');
-                return;
-            }
-            
-            if (!experiencesData || experiencesData.length === 0) {
-                console.warn('Aucune expérience à afficher');
-                expGrid.innerHTML = '<p class="text-zinc-400 text-center py-10">Aucune expérience disponible</p>';
-                return;
-            }
-            
-            console.log(`Affichage de ${experiencesData.length} expériences`);
-            expGrid.innerHTML = '';
-            
-            experiencesData.forEach((exp, index) => {
-                const expCard = document.createElement('div');
-                expCard.className = 'glass rounded-3xl p-6 md:p-8 border border-white/10 hover:border-blue-500/50 transition-all duration-500 tilt-card click-feedback';
-                
-                expCard.innerHTML = `
-                    <div class="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
-                        <!-- Logo de l'entreprise -->
-                        <div class="flex-shrink-0 w-24 h-24 md:w-32 md:h-32 bg-white rounded-2xl p-4 flex items-center justify-center shadow-lg border-2 border-white/20 hover:border-blue-500/50 transition-all">
-                            <img src="${exp.logo}" alt="${exp.company}" class="w-full h-full object-contain" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext x=%2250%22 y=%2250%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2220%22 fill=%22%23666%22%3E${exp.company.charAt(0)}%3C/text%3E%3C/svg%3E'">
-                        </div>
-                        
-                        <!-- Contenu -->
-                        <div class="flex-1 min-w-0">
-                            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-4">
-                                <div>
-                                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">${exp.role}</h3>
-                                    <p class="text-xl md:text-2xl font-semibold text-blue-400 mb-1">${exp.company}</p>
-                                    <p class="text-sm md:text-base text-zinc-400 flex items-center gap-2">
-                                        <i class="fas fa-calendar-alt text-blue-500"></i>
-                                        <span>${exp.date}</span>
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <p class="text-zinc-300 text-base md:text-lg leading-relaxed mb-4">${exp.desc}</p>
-                            
-                            <!-- Tâches principales (3 tirets) -->
-                            <div class="mb-6 space-y-2">
-                                ${getExperienceTasks(exp).map(task => `
-                                    <div class="flex items-start gap-3 text-zinc-300">
-                                        <span class="text-blue-400 mt-1">▸</span>
-                                        <span class="text-sm md:text-base">${task}</span>
-                                    </div>
-                                `).join('')}
-                            </div>
-                            
-                            <!-- Badges de compétences -->
-                                <div class="flex flex-wrap gap-2">
-                                ${exp.badges.map(badge => `
-                                    <span class="inline-flex items-center gap-1 bg-blue-600/20 border border-blue-500/30 text-blue-300 px-4 py-2 rounded-lg text-xs md:text-sm font-semibold uppercase tracking-wider">
-                                        <i class="fas fa-check-circle text-blue-400"></i>
-                                        ${badge}
-                                    </span>
-                                `).join('')}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                
-                expGrid.appendChild(expCard);
-                // Pas d'animation GSAP - juste affichage direct
-                expCard.style.opacity = '1';
-                });
+                </div>
+            `).join('');
         }
 
-        // Load Certifications
-        function loadCertifications() {
-            console.log('loadCertifications appelé, certificationsData:', certificationsData);
-                const cGrid = document.getElementById('certs-grid');
-            if (!cGrid) {
-                console.error('certs-grid element not found');
-                return;
-            }
-            
-            if (!certificationsData || certificationsData.length === 0) {
-                console.warn('Aucune certification à afficher, certificationsData:', certificationsData);
-                cGrid.innerHTML = '<p class="text-zinc-400 text-center col-span-full py-10">Aucune certification disponible</p>';
-                return;
-            }
-            
-            console.log(`Affichage de ${certificationsData.length} certifications`);
-            cGrid.innerHTML = '';
-            
-            certificationsData.forEach((c, index) => {
-                console.log(`Création carte certification ${index + 1}:`, c.title);
-                const card = document.createElement('div');
-                card.className = 'p-6 glass rounded-2xl flex flex-col items-center text-center border border-white/10 tilt-card glass-hover click-feedback';
-                card.onclick = () => openCertModal(c.image);
-                
-                card.innerHTML = `
-                    <div class="w-full h-72 mb-6 rounded-xl overflow-hidden bg-white border-2 border-white/20 group-hover:border-blue-500 transition-all relative shadow-lg">
-                        <iframe loading="lazy" src="${c.image}#toolbar=0&navpanes=0&scrollbar=0&zoom=page-fit" type="application/pdf" class="w-full h-full pdf-frame" frameborder="0" style="background: white;"></iframe>
-                        <div class="absolute inset-0 flex items-center justify-center bg-black/70 opacity-0 hover:opacity-100 transition-opacity cursor-pointer backdrop-blur-sm">
-                            <span class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-colors shadow-xl">
-                                <i class="fas fa-external-link-alt mr-2"></i>Ouvrir en Plein Écran
-                            </span>
-                            </div>
+        function loadProjects() {
+            document.getElementById('projects-grid').innerHTML = projectData.map(p => `
+                <div onclick="openProject('${p.id}')" class="glass rounded-3xl overflow-hidden group cursor-pointer border border-white/10 hover:border-blue-500/50 transition-all flex flex-col h-full">
+                    <div class="relative aspect-video overflow-hidden">
+                        <img src="${p.thumbnail.replace('Data/projects/', 'Data/Demo_projects/')}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-blue-900/40 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center backdrop-blur-sm">
+                            <div class="bg-white text-black w-14 h-14 rounded-full flex items-center justify-center shadow-xl"><i class="fas fa-play ml-1"></i></div>
                         </div>
-                    <span class="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-2 line-clamp-1">${c.org}</span>
-                    <h4 class="text-sm lg:text-base font-bold mb-3 leading-tight text-white group-hover:text-blue-400 transition-colors line-clamp-2 min-h-[3rem]">${c.title}</h4>
-                    ${c.verify_link !== "N/A" ? `<a href="${c.verify_link}" target="_blank" onclick="event.stopPropagation()" class="mt-auto text-[10px] text-blue-400 hover:text-blue-300 underline tracking-widest uppercase transition-colors font-semibold">✓ Vérifier</a>` : '<span class="mt-auto text-[10px] text-zinc-500 uppercase tracking-widest">Non vérifiable</span>'}
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-white line-clamp-1">${p.title}</h3>
+                        <p class="text-zinc-400 text-sm line-clamp-2">${p.description}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderCertificates(page) {
+            currentCertPage = page;
+            const grid = document.getElementById('certs-grid');
+            const totalPages = Math.ceil(certificationsData.length / certsPerPage);
+            const start = (page - 1) * certsPerPage;
+            const pageData = certificationsData.slice(start, start + certsPerPage);
+
+            grid.innerHTML = pageData.map(c => {
+                // CORRECTION DU CHEMIN DUPLIQUE
+                const cleanPath = c.image.startsWith('Data/') ? c.image : `Data/certif/${c.image}`;
+                return `
+                    <div class="cert-card-container glass p-6 rounded-2xl border border-white/10 hover:border-blue-500 transition-all group">
+                        <div class="cert-overlay" onclick="openCertModal('${cleanPath}')"></div>
+                        <div class="h-64 mb-4 rounded-xl overflow-hidden bg-white">
+                            <iframe src="${cleanPath}#toolbar=0" class="w-full h-full border-none"></iframe>
+                        </div>
+                        <p class="text-blue-400 text-[10px] uppercase tracking-widest font-bold">${c.org}</p>
+                        <h4 class="font-bold text-white text-sm line-clamp-2 mt-1">${c.title}</h4>
+                    </div>
                 `;
-                
-                cGrid.appendChild(card);
-                
-                // Animation optimisée - seulement si visible
-                if (index < 10) { // Animer seulement les 10 premières pour performance
-                    gsap.from(card, {
-                        opacity: 0,
-                        y: 20,
-                        duration: 0.3,
-                        delay: index * 0.03,
-                        ease: "power2.out"
-                    });
-                } else {
-                    card.style.opacity = '1';
-                }
-            });
+            }).join('');
+
+            document.getElementById('certs-pagination').innerHTML = `
+                <button onclick="renderCertificates(${page - 1})" ${page === 1 ? 'disabled' : ''} class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
+                <span class="font-bold text-blue-400">Page ${page} / ${totalPages}</span>
+                <button onclick="renderCertificates(${page + 1})" ${page === totalPages ? 'disabled' : ''} class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+            `;
         }
-        
-        // Scroll Animations - Optimisées
-        function initScrollAnimations() {
-            // Utiliser Intersection Observer pour meilleure performance
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        gsap.to(entry.target, {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.6,
-                            ease: "power2.out"
-                        });
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-            
-            const sections = document.querySelectorAll('#about, #experiences, #projects, #certs, #contact');
-            sections.forEach(section => {
-                gsap.set(section, { opacity: 1, y: 0 });
-                observer.observe(section);
-            });
-        }
-        
-        // Open Project Modal
+
         function openProject(id) {
-            const p = projectData.find(proj => proj.id === id);
-            if (!p) return;
-            
-            const modal = document.getElementById('video-modal');
+            const p = projectData.find(proj => proj.id == id);
+            if(!p) return;
             const video = document.getElementById('modal-video');
-
+            video.src = p.media.replace('Data/projects/', 'Data/Demo_projects/');
             document.getElementById('modal-title').innerText = p.title;
             document.getElementById('modal-desc').innerText = p.description;
             document.getElementById('modal-source').href = p.source_link;
-            video.src = p.media;
-
-            modal.classList.remove('hidden');
-            
-            // GSAP Animation
-            const tl = gsap.timeline();
-            tl.fromTo(modal, 
-                { opacity: 0 },
-                { opacity: 1, duration: 0.3, ease: "power2.out" }
-            )
-            .fromTo("#modal-content",
-                { scale: 0.8, opacity: 0, y: 50 },
-                { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" },
-                "-=0.2"
-            );
-            
+            document.getElementById('video-modal').classList.remove('hidden');
             video.play();
         }
 
-        // Close Project Modal
         function closeModal() {
-            const modal = document.getElementById('video-modal');
-            const video = document.getElementById('modal-video');
+            document.getElementById('video-modal').classList.add('hidden');
+            document.getElementById('modal-video').pause();
+        }
 
-            const tl = gsap.timeline({
-                onComplete: () => {
-                modal.classList.add('hidden');
-                video.pause();
-                video.src = "";
-                }
-            });
-            
-            tl.to("#modal-content", 
-                { scale: 0.8, opacity: 0, y: 50, duration: 0.3, ease: "power2.in" }
-            )
-            .to(modal,
-                { opacity: 0, duration: 0.2, ease: "power2.in" },
-                "-=0.2"
-            );
+        function openCertModal(src) {
+            document.getElementById('cert-pdf').src = src;
+            document.getElementById('cert-modal').classList.remove('hidden');
         }
-        
-        // Open Certification Modal
-        function openCertModal(pdfSrc) {
-            const modal = document.getElementById('cert-modal');
-            const iframe = document.getElementById('cert-pdf');
-            
-            iframe.src = pdfSrc;
-            modal.classList.remove('hidden');
-            
-            // GSAP Animation
-            const tl = gsap.timeline();
-            tl.fromTo(modal,
-                { opacity: 0 },
-                { opacity: 1, duration: 0.3, ease: "power2.out" }
-            )
-            .fromTo("#cert-modal-content",
-                { scale: 0.8, opacity: 0, y: 50 },
-                { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" },
-                "-=0.2"
-            );
-        }
-        
-        // Close Certification Modal
+
         function closeCertModal() {
-            const modal = document.getElementById('cert-modal');
-            const iframe = document.getElementById('cert-pdf');
-            
-            const tl = gsap.timeline({
-                onComplete: () => {
-                    modal.classList.add('hidden');
-                    iframe.src = "";
-                }
-            });
-            
-            tl.to("#cert-modal-content",
-                { scale: 0.8, opacity: 0, y: 50, duration: 0.3, ease: "power2.in" }
-            )
-            .to(modal,
-                { opacity: 0, duration: 0.2, ease: "power2.in" },
-                "-=0.2"
-            );
+            document.getElementById('cert-modal').classList.add('hidden');
+            document.getElementById('cert-pdf').src = "";
         }
-        
-        // Click Feedback on all interactive elements - Optimisé
-        document.addEventListener('click', (e) => {
-            const element = e.target.closest('.click-feedback');
-            if (element) {
-                element.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    element.style.transform = '';
-                }, 100);
-            }
-        });
-        
-        // Fonction pour fermer la bannière PFE
-        function closePfeBanner() {
-            const banner = document.getElementById('pfe-banner');
-            if (banner) {
-                gsap.to(banner, {
-                    y: -100,
-                    duration: 0.3,
-                    ease: "power2.in",
-                    onComplete: () => {
-                        banner.style.display = 'none';
-                        localStorage.setItem('pfeBannerClosed', 'true');
-                    }
-                });
-            }
-        }
-        
-        // Afficher la bannière PFE avec animation
-        function showPfeBanner() {
-            const banner = document.getElementById('pfe-banner');
-            const isClosed = localStorage.getItem('pfeBannerClosed');
-            
-            if (banner && !isClosed) {
-                setTimeout(() => {
-                    gsap.to(banner, {
-                        y: 0,
-                        duration: 0.5,
-                        ease: "back.out(1.7)"
-                    });
-                }, 1000);
-            }
-        }
-        
-        // Fonction pour copier dans le presse-papier
-        function copyToClipboard(text, type) {
-            navigator.clipboard.writeText(text).then(() => {
-                // Afficher un message de confirmation
-                const toast = document.createElement('div');
-                toast.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-lg z-[300] shadow-xl';
-                toast.innerHTML = `<i class="fas fa-check-circle mr-2"></i>${type} copié dans le presse-papier !`;
-                document.body.appendChild(toast);
-                
-                setTimeout(() => {
-                    toast.style.opacity = '0';
-                    toast.style.transform = 'translate(-50%, -20px)';
-                    setTimeout(() => toast.remove(), 300);
-                }, 2000);
-            }).catch(err => {
-                console.error('Erreur lors de la copie:', err);
-            });
-        }
-        
-        // Initialize - Attendre que le DOM soit prêt
-        function init() {
-            console.log('Initialisation du portfolio...');
-            console.log('Éléments DOM:', {
-                projects: document.getElementById('projects'),
-                projectsGrid: document.getElementById('projects-grid'),
-                certs: document.getElementById('certs'),
-                certsGrid: document.getElementById('certs-grid'),
-                contact: document.getElementById('contact')
-            });
-            
-            // S'assurer que les sections sont visibles immédiatement
-            const projectsSection = document.getElementById('projects');
-            const certsSection = document.getElementById('certs');
-            const contactSection = document.getElementById('contact');
-            
-            if (projectsSection) {
-                projectsSection.style.display = 'block';
-                projectsSection.style.opacity = '1';
-                projectsSection.style.visibility = 'visible';
-            }
-            if (certsSection) {
-                certsSection.style.display = 'block';
-                certsSection.style.opacity = '1';
-                certsSection.style.visibility = 'visible';
-            }
-            if (contactSection) {
-                contactSection.style.display = 'block';
-                contactSection.style.opacity = '1';
-                contactSection.style.visibility = 'visible';
-            }
 
-        loadPortfolio();
+        function copyToClipboard(text, label) {
+            navigator.clipboard.writeText(text);
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-10 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-8 py-3 rounded-full z-[3000]';
+            toast.innerText = `${label} copié !`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
         }
+
+        function closePfeBanner() { gsap.to("#pfe-banner", { y: -200 }); }
+        function showPfeBanner() { setTimeout(() => gsap.to("#pfe-banner", { y: 0 }), 1500); }
+        document.getElementById('mobile-menu-btn').onclick = () => document.getElementById('mobile-menu').classList.toggle('hidden');
         
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
-        } else {
-            // DOM déjà chargé
-            init();
-        }
-        
-        // Log de débogage
-        console.log('Script initialisé, état DOM:', document.readyState);
+        window.onload = loadPortfolio;
     </script>
 </body>
 </html>

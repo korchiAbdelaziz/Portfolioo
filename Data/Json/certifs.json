@@ -33,6 +33,21 @@
     "verify_link": "https://coursera.org/verify/8UVA30CWHE50"
   },
   {
+    "title": "Advanced Spring Cloud Microservices & Deployment with Docker",
+    "org": "packt",
+    "date": "2025-12-30",
+    "skills": [
+      "Spring",
+      "Docker",
+      "Deployment",
+      "Microservices",
+      "Cloud",
+      "DevOps"
+    ],
+    "image": "Data/certif/Advanced_Spring_Cloud_Microservices_&_Deployment_with_Docker.pdf",
+    "verify_link": "https://www.coursera.org/account/accomplishments/verify/VNDTAEPYN3N4"
+  },
+  {
     "title": "Impact Measurement & Management for the SDGs",
     "org": "Duke_University",
     "date": "2024-05-20",

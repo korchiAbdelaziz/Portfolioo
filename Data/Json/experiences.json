@@ -1,37 +1,56 @@
 {
-    "experiences": [
-      {
-        "company": "Royal Air Maroc",
-        "logo": "Data/Images/Logo_Soété/royal.png",
-        "role": "Data Engineering Intern",
-        "date": "07/2025 - 09/2025",
-        "badges": ["Python", "OpenCV", "ETL", "OCR"],
-        "desc": "Mise en place d’un système OCR pour l’extraction automatique des données des billets d’avion et intégration vers les pipelines ETL."
-      },
-      {
-        "company": "Zen Networks",
-        "logo": "Data/Images/Logo_Soété/zen.png",
-        "role": "Chatbot & Data Automation Developer",
-        "date": "08/2025 - 10/2025",
-        "badges": ["LLM local", "NLP", "SQL", "Superset"],
-        "desc": "Développement d’un agent intelligent LLM local pour le diagnostic d’anomalies et génération de requêtes SQL via NLP."
-      },
-      {
-        "company": "Wings Technologie",
-        "logo": "Data/Images/Logo_Soété/win.png",
-        "role": "Mobile & Web Developer",
-        "date": "06/2024 - 07/2024",
-        "badges": ["React.js", "Express.js", "Firebase"],
-        "desc": "Développement d’un site web de création de cartes digitales personnalisées."
-      },
-      {
-        "company": "Agri 4.0",
-        "logo": "Data/Images/Logo_Soété/agri.png",
-        "role": "Full-Stack Developer",
-        "date": "09/2023 - 10/2023",
-        "badges": ["Laravel", "React.js", "MongoDB"],
-        "desc": "Conception et développement d’une application web de gestion de magasins avec base NoSQL."
-      }
-    ]
-  }
-  
+  "experiences": [
+    {
+      "company": "Royal Air Maroc",
+      "logo": "Data/Images/Logo_Soété/royal.png",
+      "role": "Data Engineering Intern",
+      "date": "07/2025 - 09/2025",
+      "badges": ["Python", "OpenCV", "ETL", "OCR"],
+      "desc": "Mise en place d’un système OCR pour l’extraction automatique des données des billets d’avion et intégration vers les pipelines ETL.",
+      "highlights": [
+        "Implémentation d’un système OCR performant pour automatiser la saisie des billets.",
+        "Intégration fluide des données extraites dans les pipelines ETL existants.",
+        "Optimisation du traitement des données pour réduire les erreurs manuelles."
+      ]
+    },
+    {
+      "company": "Zen Networks",
+      "logo": "Data/Images/Logo_Soété/zen.png",
+      "role": "Chatbot & Data Automation Developer",
+      "date": "08/2025 - 10/2025",
+      "badges": ["LLM local", "NLP", "SQL", "Superset"],
+      "desc": "Développement d’un agent intelligent LLM local pour le diagnostic d’anomalies et génération de requêtes SQL via NLP.",
+      "highlights": [
+        "Création d’un agent IA LLM local capable de diagnostiquer des anomalies.",
+        "Automatisation de la génération de requêtes SQL grâce au NLP.",
+        "Amélioration de l’efficacité des analyses de données pour l’équipe."
+      ]
+    },
+    {
+      "company": "Wings Technologie",
+      "logo": "Data/Images/Logo_Soété/win.png",
+      "role": "Web Developer",
+      "date": "06/2024 - 07/2024",
+      "badges": ["React.js", "Express.js", "Firebase"],
+      "desc": "Développement d’un site web de création de cartes digitales personnalisées.",
+      "highlights": [
+        "Conception d’une interface utilisateur interactive pour créer des cartes digitales.",
+        "Implémentation backend robuste avec Express.js et Firebase.",
+        "Optimisation de l’expérience utilisateur pour un rendu fluide et intuitif."
+      ]
+    },
+    {
+      "company": "Agri 4.0",
+      "logo": "Data/Images/Logo_Soété/agri.png",
+      "role": "Full-Stack Developer",
+      "date": "09/2023 - 10/2023",
+      "badges": ["Laravel", "React.js", "MongoDB"],
+      "desc": "Conception et développement d’une application web de gestion de magasins avec base NoSQL.",
+      "highlights": [
+        "Développement complet de l’application web full-stack avec Laravel et React.js.",
+        "Gestion efficace des données avec MongoDB pour une scalabilité optimale.",
+        "Création de fonctionnalités personnalisées pour simplifier la gestion des magasins."
+      ]
+    }
+  ]
+}
